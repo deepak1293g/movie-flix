@@ -146,7 +146,7 @@ const MOCK_EPISODES = [
         name: "Ep 1: The Ocean",
         overview: "Dive deep into the blue abyss.",
         videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-        still_path: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Clouds_over_the_Atlantic_Ocean.jpg"
+        still_path: "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg"
     },
     {
         id: 1002,
@@ -154,7 +154,7 @@ const MOCK_EPISODES = [
         name: "Ep 2: The Forest",
         overview: "Secrets of the ancient woods.",
         videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-        still_path: "https://upload.wikimedia.org/wikipedia/commons/4/42/Redwood_National_Park%2C_fog_in_the_forest.jpg"
+        still_path: "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg"
     },
     {
         id: 1003,
@@ -162,7 +162,7 @@ const MOCK_EPISODES = [
         name: "Ep 3: The Mountains",
         overview: "High altitude survival.",
         videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-        still_path: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg"
+        still_path: "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg"
     }
 ];
 
