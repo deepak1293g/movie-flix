@@ -58,179 +58,160 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                {/* Desktop/Tablet Navigation Links */}
-                <div className="hidden md:flex items-center gap-4 lg:gap-12">
+                {/* Desktop Navigation Links */}
+                <div className="hidden lg:flex items-center gap-4 lg:gap-12">
                     {navLinks.map((link) => (
                         <Link
                             key={link.path}
                             to={link.path}
-                            className={`relative group font-black tracking-widest text-[11px] lg:text-[15px] transition-all duration-300 flex items-center gap-1 lg:gap-2 ${isActive(link.path) ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+                            className={`relative group font-black tracking-widest text-[15px] transition-all duration-300 flex items-center gap-2 ${isActive(link.path) ? 'text-white' : 'text-gray-400 hover:text-white'}`}
                         >
-                            {link.icon && <link.icon className={`w-3 h-3 lg:w-4 lg:h-4 transition-colors ${isActive(link.path) ? 'text-brand-red' : 'group-hover:text-brand-red'}`} />}
+                            {link.icon && <link.icon className={`w-4 h-4 transition-colors ${isActive(link.path) ? 'text-brand-red' : 'group-hover:text-brand-red'}`} />}
                             {link.name}
                             <div className={`absolute -bottom-2 left-0 h-0.5 bg-brand-red transition-all duration-500 shadow-[0_0_10px_#E50914] ${isActive(link.path) ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-1/2 group-hover:opacity-50'}`} />
                         </Link>
                     ))}
                 </div>
 
-                {/* Right Section: Search & User */}
+                {/* Right Section: Desktop Search & User */}
                 <div className="flex items-center gap-4 sm:gap-8">
-                    <div className="hidden md:block">
+                    <div className="hidden lg:block">
                         <SearchBar />
                     </div>
 
-                    <div className="hidden md:flex items-center gap-6 text-gray-300">
-                        <Link to="/downloads" className="hover:text-brand-red transition-all hover:scale-110 duration-300 relative group/icon">
-                            <Download className="w-6 h-6" />
-                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-red rounded-full opacity-0 group-hover/icon:opacity-100 transition-opacity" />
-                        </Link>
+
+                    {user ? (
+                        <div className="relative group/user">
+                            <div className="flex items-center gap-3 cursor-pointer group">
+                                <div className="w-10 h-10 rounded-full premium-gradient-red flex items-center justify-center text-lg font-black text-white shadow-xl shadow-brand-red/10 group-hover:shadow-brand-red/40 group-hover:scale-105 transition-all duration-500 ring-2 ring-white/5 group-hover:ring-brand-red/30">
+                                    {user.name.charAt(0).toUpperCase()}
+                                </div>
+                                <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:rotate-180 transition-all duration-500" />
+                            </div>
+
+                            <div className="absolute right-0 top-full pt-4 opacity-0 invisible group-hover/user:opacity-100 group-hover/user:visible transition-all duration-500 transform translate-y-4 group-hover/user:translate-y-0">
+                                <div className="glass-dark border border-white/10 rounded-[24px] shadow-2xl p-2 w-64 overflow-hidden">
+                                    <div className="px-4 py-4 border-b border-white/10 mb-2">
+                                        <p className="text-base text-white font-bold">{user.name}</p>
+                                        <p className="text-sm text-gray-500 truncate">{user.email}</p>
+                                    </div>
+                                    {mobileUserLinks.map((item) => (
+                                        <Link key={item.path} to={item.path} className="flex items-center gap-3 w-full px-4 py-3 text-base text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all text-left">
+                                            <item.icon className="w-5 h-5" />
+                                            {item.name}
+                                        </Link>
+                                    ))}
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex items-center gap-3 w-full px-4 py-3 text-base text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                                    >
+                                        <LogOut className="w-5 h-5" />
+                                        Sign Out
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="hidden lg:flex items-center">
+                            <Link to="/login" className="text-sm sm:text-base lg:text-base font-bold hover:text-brand-red transition-all hover:scale-110 duration-300">Login</Link>
+                        </div>
+                    )}
+                </div>
+
+                <div className="hidden md:flex lg:hidden flex-1 justify-center px-8">
+                    <SearchBar />
+                </div>
+
+                <button
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-all z-50 relative w-10 h-10 flex flex-col justify-center items-center gap-1.5"
+                >
+                    <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                    <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+                    <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+                </button>
+            </div>
+            {mobileMenuOpen && (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed inset-0 bg-black z-40 lg:hidden pt-24 px-6 overflow-y-auto"
+                >
+                    <div className="flex flex-col gap-4">
+                        {navLinks.map((item, index) => (
+                            <motion.div
+                                key={item.path}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.05 + 0.1 }}
+                            >
+                                <Link
+                                    to={item.path}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="flex items-center gap-4 text-2xl font-bold text-white hover:text-brand-red transition-colors py-4 border-b border-white/10"
+                                >
+                                    {item.icon && <item.icon className="w-6 h-6 text-brand-red" />}
+                                    {item.name}
+                                </Link>
+                            </motion.div>
+                        ))}
 
                         {user ? (
-                            <div className="relative group/user">
-                                <div className="flex items-center gap-3 cursor-pointer group">
-                                    <div className="w-10 h-10 rounded-full premium-gradient-red flex items-center justify-center text-lg font-black text-white shadow-xl shadow-brand-red/10 group-hover:shadow-brand-red/40 group-hover:scale-105 transition-all duration-500 ring-2 ring-white/5 group-hover:ring-brand-red/30">
-                                        {user.name.charAt(0).toUpperCase()}
-                                    </div>
-                                    <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:rotate-180 transition-all duration-500" />
-                                </div>
-
-                                <div className="absolute right-0 top-full pt-4 opacity-0 invisible group-hover/user:opacity-100 group-hover/user:visible transition-all duration-500 transform translate-y-4 group-hover/user:translate-y-0">
-                                    <div className="glass-dark border border-white/10 rounded-[24px] shadow-2xl p-2 w-64 overflow-hidden">
-                                        <div className="px-4 py-4 border-b border-white/10 mb-2">
-                                            <p className="text-base text-white font-bold">{user.name}</p>
-                                            <p className="text-sm text-gray-500 truncate">{user.email}</p>
-                                        </div>
-                                        {mobileUserLinks.map((item) => (
-                                            <Link key={item.path} to={item.path} className="flex items-center gap-3 w-full px-4 py-3 text-base text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all text-left">
-                                                <item.icon className="w-5 h-5" />
-                                                {item.name}
-                                            </Link>
-                                        ))}
-                                        <button
-                                            onClick={handleLogout}
-                                            className="flex items-center gap-3 w-full px-4 py-3 text-base text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
-                                        >
-                                            <LogOut className="w-5 h-5" />
-                                            Sign Out
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-2 sm:gap-4 md:gap-3">
-                                <Link to="/login" className="text-sm sm:text-base md:text-xs lg:text-base font-bold hover:text-brand-red transition-all hover:scale-110 duration-300">Login</Link>
-                                <Link to="/register" className="hidden lg:block bg-gradient-to-r from-brand-red to-red-700 text-white hover:from-red-700 hover:to-brand-red px-4 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base font-black transition-all duration-300 transform hover:scale-110 shadow-lg shadow-brand-red/40 hover:shadow-brand-red/60">Sign Up</Link>
-                            </div>
-                        )}
-                    </div>
-
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-all z-50 relative w-10 h-10 flex flex-col justify-center items-center gap-1.5"
-                    >
-                        <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                        <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'opacity-0' : ''}`} />
-                        <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-                    </button>
-                </div>
-            </div>
-
-            {!mobileMenuOpen && (
-                <div className="md:hidden px-6 pb-4 mt-2">
-                    <SearchBar isMobile={true} />
-                </div>
-            )}
-
-            {/* Mobile Menu Overlay with Staggered Animations */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-black z-40 md:hidden pt-24 px-6 overflow-y-auto"
-                    >
-                        <div className="flex flex-col gap-4">
-                            {navLinks.map((item, index) => (
-                                <motion.div
-                                    key={item.path}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.05 + 0.1 }}
-                                >
-                                    <Link
-                                        to={item.path}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="flex items-center gap-4 text-2xl font-bold text-white hover:text-brand-red transition-colors py-4 border-b border-white/10"
-                                    >
-                                        {item.icon && <item.icon className="w-6 h-6 text-brand-red" />}
-                                        {item.name}
-                                    </Link>
-                                </motion.div>
-                            ))}
-
-                            {user ? (
-                                <>
-                                    {mobileUserLinks.map((item, index) => (
-                                        <motion.div
-                                            key={item.path}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: (navLinks.length + index) * 0.05 + 0.1 }}
-                                        >
-                                            <Link
-                                                to={item.path}
-                                                onClick={() => setMobileMenuOpen(false)}
-                                                className="flex items-center gap-4 text-xl font-bold text-gray-400 hover:text-white transition-colors py-3"
-                                            >
-                                                <item.icon className="w-5 h-5" />
-                                                {item.name}
-                                            </Link>
-                                        </motion.div>
-                                    ))}
+                            <>
+                                {mobileUserLinks.map((item, index) => (
                                     <motion.div
+                                        key={item.path}
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: (navLinks.length + mobileUserLinks.length) * 0.05 + 0.1 }}
+                                        transition={{ delay: (navLinks.length + index) * 0.05 + 0.1 }}
                                     >
-                                        <button
-                                            onClick={handleLogout}
-                                            className="flex items-center gap-4 text-xl font-bold text-red-500 hover:text-red-400 transition-colors py-3 text-left w-full mt-4"
+                                        <Link
+                                            to={item.path}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className="flex items-center gap-4 text-xl font-bold text-gray-400 hover:text-white transition-colors py-3"
                                         >
-                                            <LogOut className="w-5 h-5" />
-                                            Sign Out
-                                        </button>
+                                            <item.icon className="w-5 h-5" />
+                                            {item.name}
+                                        </Link>
                                     </motion.div>
-                                </>
-                            ) : (
+                                ))}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.3 }}
-                                    className="flex flex-col gap-4 pt-6"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: (navLinks.length + mobileUserLinks.length) * 0.05 + 0.1 }}
                                 >
-                                    <Link
-                                        to="/login"
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="text-center bg-white/10 text-white px-8 py-4 rounded-full text-lg font-bold transition-all hover:bg-white/20"
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex items-center gap-4 text-xl font-bold text-red-500 hover:text-red-400 transition-colors py-3 text-left w-full mt-4"
                                     >
-                                        Login
-                                    </Link>
-                                    <Link
-                                        to="/register"
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="text-center bg-gradient-to-r from-brand-red to-red-700 text-white px-8 py-4 rounded-full text-lg font-black transition-all hover:from-red-700 hover:to-brand-red shadow-lg shadow-brand-red/40"
-                                    >
-                                        Sign Up
-                                    </Link>
+                                        <LogOut className="w-5 h-5" />
+                                        Sign Out
+                                    </button>
                                 </motion.div>
-                            )}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
+                            </>
+                        ) : (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="flex flex-col gap-4 pt-6"
+                            >
+                                <Link
+                                    to="/login"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-center bg-brand-red text-white px-8 py-4 rounded-full text-lg font-black transition-all hover:bg-red-700 shadow-lg shadow-brand-red/40"
+                                >
+                                    Sign In
+                                </Link>
+                            </motion.div>
+                        )}
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+        </nav >
     );
 };
 
