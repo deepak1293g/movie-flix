@@ -131,86 +131,88 @@ const Navbar = () => {
                     <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
                 </button>
             </div>
-            {mobileMenuOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="fixed inset-0 bg-black z-40 lg:hidden pt-24 px-6 overflow-y-auto"
-                >
-                    <div className="flex flex-col gap-4">
-                        {navLinks.map((item, index) => (
-                            <motion.div
-                                key={item.path}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.05 + 0.1 }}
-                            >
-                                <Link
-                                    to={item.path}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-4 text-2xl font-bold text-white hover:text-brand-red transition-colors py-4 border-b border-white/10"
-                                >
-                                    {item.icon && <item.icon className="w-6 h-6 text-brand-red" />}
-                                    {item.name}
-                                </Link>
-                            </motion.div>
-                        ))}
-
-                        {user ? (
-                            <>
-                                {mobileUserLinks.map((item, index) => (
-                                    <motion.div
-                                        key={item.path}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: (navLinks.length + index) * 0.05 + 0.1 }}
-                                    >
-                                        <Link
-                                            to={item.path}
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="flex items-center gap-4 text-xl font-bold text-gray-400 hover:text-white transition-colors py-3"
-                                        >
-                                            <item.icon className="w-5 h-5" />
-                                            {item.name}
-                                        </Link>
-                                    </motion.div>
-                                ))}
+            {/* Mobile Menu Overlay with Staggered Animations */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 bg-black z-40 lg:hidden pt-24 px-6 overflow-y-auto"
+                    >
+                        <div className="flex flex-col gap-4">
+                            {navLinks.map((item, index) => (
                                 <motion.div
+                                    key={item.path}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: (navLinks.length + mobileUserLinks.length) * 0.05 + 0.1 }}
+                                    transition={{ delay: index * 0.05 + 0.1 }}
                                 >
-                                    <button
-                                        onClick={handleLogout}
-                                        className="flex items-center gap-4 text-xl font-bold text-red-500 hover:text-red-400 transition-colors py-3 text-left w-full mt-4"
+                                    <Link
+                                        to={item.path}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="flex items-center gap-4 text-2xl font-bold text-white hover:text-brand-red transition-colors py-4 border-b border-white/10"
                                     >
-                                        <LogOut className="w-5 h-5" />
-                                        Sign Out
-                                    </button>
+                                        {item.icon && <item.icon className="w-6 h-6 text-brand-red" />}
+                                        {item.name}
+                                    </Link>
                                 </motion.div>
-                            </>
-                        ) : (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3 }}
-                                className="flex flex-col gap-4 pt-6"
-                            >
-                                <Link
-                                    to="/login"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="text-center bg-brand-red text-white px-8 py-4 rounded-full text-lg font-black transition-all hover:bg-red-700 shadow-lg shadow-brand-red/40"
+                            ))}
+
+                            {user ? (
+                                <>
+                                    {mobileUserLinks.map((item, index) => (
+                                        <motion.div
+                                            key={item.path}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: (navLinks.length + index) * 0.05 + 0.1 }}
+                                        >
+                                            <Link
+                                                to={item.path}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="flex items-center gap-4 text-xl font-bold text-gray-400 hover:text-white transition-colors py-3"
+                                            >
+                                                <item.icon className="w-5 h-5" />
+                                                {item.name}
+                                            </Link>
+                                        </motion.div>
+                                    ))}
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: (navLinks.length + mobileUserLinks.length) * 0.05 + 0.1 }}
+                                    >
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center gap-4 text-xl font-bold text-red-500 hover:text-red-400 transition-colors py-3 text-left w-full mt-4"
+                                        >
+                                            <LogOut className="w-5 h-5" />
+                                            Sign Out
+                                        </button>
+                                    </motion.div>
+                                </>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                    className="flex flex-col gap-4 pt-6"
                                 >
-                                    Sign In
-                                </Link>
-                            </motion.div>
-                        )}
-                    </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+                                    <Link
+                                        to="/login"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="text-center bg-brand-red text-white px-8 py-4 rounded-full text-lg font-black transition-all hover:bg-red-700 shadow-lg shadow-brand-red/40"
+                                    >
+                                        Sign In
+                                    </Link>
+                                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav >
     );
 };

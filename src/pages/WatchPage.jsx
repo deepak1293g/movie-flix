@@ -399,7 +399,7 @@ const WatchPage = () => {
     if (!content) return <div className="text-white text-center pt-24">Content Not Found</div>;
 
     return (
-        <div className="pt-36 md:pt-20 min-h-screen bg-[#0f1014] text-white">
+        <div className="pt-36 md:pt-44 min-h-screen bg-[#0f1014] text-white">
             <div className="max-w-[1600px] mx-auto flex flex-col gap-4 sm:gap-8 pb-20">
 
                 {/* Main Video Section */}
