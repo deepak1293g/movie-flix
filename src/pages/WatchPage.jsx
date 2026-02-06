@@ -605,7 +605,7 @@ const WatchPage = () => {
                                 {type === 'tv' && (
                                     <div className="space-y-6">
                                         <div className="flex items-center justify-between">
-                                            <h2 className="text-2xl font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Episodes</h2>
+                                            <h2 className="text-xl font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Episodes</h2>
                                             <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-sm font-bold">Season {season}</div>
                                         </div>
                                         <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto no-scrollbar pr-2 pt-2">
@@ -658,7 +658,7 @@ const WatchPage = () => {
                                 )}
 
                                 <div className="space-y-4">
-                                    <h2 className="text-2xl font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Storyline</h2>
+                                    <h2 className="text-xl font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Storyline</h2>
                                     <p className="text-gray-300 text-lg leading-relaxed max-w-4xl pt-2">{content.description}</p>
                                 </div>
                             </div>
@@ -669,7 +669,7 @@ const WatchPage = () => {
                             <div className="flex items-center justify-between px-4 sm:px-0">
                                 <div className="flex items-center gap-3">
                                     <div className="w-1.5 h-8 bg-brand-red rounded-full shadow-[0_0_15px_rgba(229,9,20,0.5)]"></div>
-                                    <h2 className="text-2xl font-black uppercase tracking-[0.2em] text-white/90">More Like This</h2>
+                                    <h2 className="text-xl font-black uppercase tracking-[0.2em] text-white/90">More Like This</h2>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/5">Curated Recommendations</span>
