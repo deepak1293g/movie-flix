@@ -219,16 +219,14 @@ const OfflineWatchPage = () => {
                         className="relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group"
                         onMouseEnter={() => setShowControls(true)}
                         onMouseLeave={() => {
-                            if (!isQualityMenuOpen) {
-                                setShowControls(false);
-                                clearTimeout(window.controlsTimeout);
-                            }
+                            setShowControls(false);
+                            clearTimeout(window.controlsTimeout);
                         }}
                         onMouseMove={() => {
                             setShowControls(true);
                             clearTimeout(window.controlsTimeout);
                             window.controlsTimeout = setTimeout(() => {
-                                if (!isQualityMenuOpen) setShowControls(false);
+                                setShowControls(false);
                             }, 3000);
                         }}
                     >
@@ -267,7 +265,6 @@ const OfflineWatchPage = () => {
                                 if (e.detail === 1) {
                                     clickTimeoutRef.current = setTimeout(() => {
                                         togglePlay();
-                                        setIsQualityMenuOpen(false);
                                     }, 250);
                                 }
                             }}
