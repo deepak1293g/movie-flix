@@ -55,7 +55,7 @@ const DownloadsPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f1014] text-white pt-44 md:pt-32 pb-20 px-4 sm:px-6">
+        <div className="min-h-screen bg-[#0f1014] text-white pt-52 md:pt-32 pb-20 px-4 sm:px-6">
             <div className={`max-w-6xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
 
                 <header className="mb-16">
