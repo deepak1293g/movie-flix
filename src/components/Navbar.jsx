@@ -185,8 +185,6 @@ const Navbar = () => {
                                 </motion.div>
                             ))}
 
-                            <div className="my-4 border-t border-white/5" />
-
                             {user ? (
                                 <>
                                     {mobileUserLinks.map((item, index) => (
