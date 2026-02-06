@@ -18,6 +18,7 @@ const OfflineWatchPage = () => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [showControls, setShowControls] = useState(true);
+    const [isManualLandscape, setIsManualLandscape] = useState(false);
     const [suppressClick, setSuppressClick] = useState(false);
     const [initialResumeTime, setInitialResumeTime] = useState(0);
     const [historyLoaded, setHistoryLoaded] = useState(false);
@@ -371,7 +372,7 @@ const OfflineWatchPage = () => {
                     {/* Main Content Sections */}
                     <div className="space-y-12 mt-4">
                         <div className="space-y-4">
-                            <h2 className="text-2xl font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Offline Metadata</h2>
+                            <h2 className="text-lg font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Offline Metadata</h2>
                             <p className="text-gray-300 text-lg leading-relaxed max-w-4xl pt-2">
                                 This title has been successfully saved to your local library. You are currently viewing the offline-optimized version. Enjoy unlimited playback without data usage or network connection. All data for this title is stored locally on this device.
                             </p>
@@ -381,7 +382,7 @@ const OfflineWatchPage = () => {
                         <div className="space-y-8 pt-8 border-t border-white/5 px-4 sm:px-0">
                             <div className="flex items-center gap-3">
                                 <div className="w-1.5 h-8 bg-brand-red rounded-full shadow-[0_0_15px_rgba(229,9,20,0.5)]"></div>
-                                <h2 className="text-xl font-black uppercase tracking-[0.2em] text-white/90">Other Downloads</h2>
+                                <h2 className="text-lg font-black uppercase tracking-[0.2em] text-white/90">Other Downloads</h2>
                             </div>
 
                             <div className="relative group/scroll">
