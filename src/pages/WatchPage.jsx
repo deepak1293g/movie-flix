@@ -32,6 +32,7 @@ const WatchPage = () => {
     const [suppressClick, setSuppressClick] = useState(false);
     const [historyLoaded, setHistoryLoaded] = useState(false);
     const [initialResumeTime, setInitialResumeTime] = useState(0);
+    const [tapCue, setTapCue] = useState(null); // { type: 'forward' | 'backward' }
 
     useEffect(() => {
         setHistoryLoaded(false);
@@ -41,6 +42,7 @@ const WatchPage = () => {
     const [previewPos, setPreviewPos] = useState(0);
     const previewVideoRef = React.useRef(null);
     const clickTimeoutRef = React.useRef(null);
+    const lastTapTimeRef = React.useRef(0);
 
     // Series State
     const [season, setSeason] = useState(1);
@@ -155,7 +157,14 @@ const WatchPage = () => {
         setTimeout(() => setSuppressClick(false), 400);
 
         if (!document.fullscreenElement) {
-            playerContainerRef.current.requestFullscreen().catch(err => {
+            playerContainerRef.current.requestFullscreen().then(() => {
+                // Try to lock landscape on mobile
+                if (window.screen?.orientation?.lock) {
+                    window.screen.orientation.lock('landscape').catch(() => {
+                        // Silent fail if browser doesn't support locking
+                    });
+                }
+            }).catch(err => {
                 toast.error(`Error attempting to enable full-screen mode: ${err.message}`);
             });
         } else {
@@ -166,6 +175,8 @@ const WatchPage = () => {
     const handleSkip = (amount) => {
         if (videoRef.current) {
             videoRef.current.currentTime += amount;
+            setTapCue(amount > 0 ? 'forward' : 'backward');
+            setTimeout(() => setTapCue(null), 600);
         }
     };
 
@@ -298,6 +309,25 @@ const WatchPage = () => {
         addDownload(content);
     };
 
+    const handleTouchInteraction = (e) => {
+        const now = Date.now();
+        const rect = playerContainerRef.current.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        const width = rect.width;
+
+        if (now - lastTapTimeRef.current < 300) {
+            // Double Tap Detected
+            if (x < width * 0.4) {
+                handleSkip(-10);
+                if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+            } else if (x > width * 0.6) {
+                handleSkip(10);
+                if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+            }
+        }
+        lastTapTimeRef.current = now;
+    };
+
     if (loading) return <div className="min-h-screen bg-[#0f1014] flex items-center justify-center text-white">Loading Content...</div>;
     if (!content) return <div className="text-white text-center pt-24">Content Not Found</div>;
 
@@ -324,8 +354,9 @@ const WatchPage = () => {
                                 if (!isQualityMenuOpen) setShowControls(false);
                             }, 3000);
                         }}
-                        onTouchStart={() => {
+                        onTouchStart={(e) => {
                             setShowControls(true);
+                            handleTouchInteraction(e);
                             clearTimeout(window.controlsTimeout);
                             window.controlsTimeout = setTimeout(() => {
                                 if (!isQualityMenuOpen) setShowControls(false);
@@ -351,18 +382,29 @@ const WatchPage = () => {
                                 }
                             }}
                             onDoubleClick={(e) => {
+                                // Disable double tap to fullscreen on mobile
+                                if (window.innerWidth < 768) return;
+
                                 if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
                                 toggleFullscreen();
                             }}
                         />
+
+                        {/* Tap Cues (Mobile) */}
+                        {tapCue && (
+                            <div className={`absolute top-1/2 -translate-y-1/2 ${tapCue === 'forward' ? 'right-10' : 'left-10'} flex flex-col items-center gap-2 animate-ping`}>
+                                <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                                    {tapCue === 'forward' ? <SkipForward className="w-8 h-8" /> : <SkipBack className="w-8 h-8" />}
+                                </div>
+                                <span className="font-bold text-sm tracking-widest">{tapCue === 'forward' ? "+10s" : "-10s"}</span>
+                            </div>
+                        )}
 
                         {/* Controls Overlay */}
                         <div
                             className={`absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60 flex flex-col justify-between transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
                             onClick={(e) => {
                                 if (suppressClick) return;
-                                // On mobile, a single tap should just toggle controls if hidden, 
-                                // or handle play/pause if shown.
                                 if (e.detail === 1) {
                                     clickTimeoutRef.current = setTimeout(() => {
                                         togglePlay();
@@ -370,14 +412,8 @@ const WatchPage = () => {
                                     }, 250);
                                 }
                             }}
-                            onTouchStart={(e) => {
-                                // Prevent double triggering if both touch and click fire
-                                e.stopPropagation();
-                                setShowControls(true);
-                                clearTimeout(window.controlsTimeout);
-                                window.controlsTimeout = setTimeout(() => setShowControls(false), 5000); // 5s for mobile
-                            }}
                             onDoubleClick={(e) => {
+                                if (window.innerWidth < 768) return;
                                 if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
                                 toggleFullscreen();
                             }}
