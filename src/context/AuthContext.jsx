@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 
 const AuthContext = createContext();
 
@@ -17,41 +16,40 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const config = {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            };
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
-            const { data } = await axios.post(`${apiUrl}/api/auth/login`, { email, password }, config);
+            const localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
+            const user = localUsers.find(u => u.email === email && u.password === password);
 
-            setUser(data);
-            localStorage.setItem('userInfo', JSON.stringify(data));
-            return { success: true };
+            if (user) {
+                const userData = { ...user, token: 'mock-token-' + Date.now() };
+                setUser(userData);
+                localStorage.setItem('userInfo', JSON.stringify(userData));
+                return { success: true };
+            } else {
+                return { success: false, message: "Invalid email or password" };
+            }
         } catch (error) {
-            return {
-                success: false,
-                message: error.response && error.response.data.message ? error.response.data.message : error.message
-            };
+            return { success: false, message: error.message };
         }
     };
 
     const register = async (name, email, password) => {
         try {
-            const config = {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            };
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
-            const { data } = await axios.post(`${apiUrl}/api/auth/register`, { name, email, password }, config);
+            const localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
 
-            setUser(data);
-            localStorage.setItem('userInfo', JSON.stringify(data));
+            if (localUsers.find(u => u.email === email)) {
+                return { success: false, message: "User already exists" };
+            }
+
+            const newUser = { id: Date.now().toString(), name, email, password };
+            localUsers.push(newUser);
+            localStorage.setItem('local_users', JSON.stringify(localUsers));
+
+            const userData = { ...newUser, token: 'mock-token-' + Date.now() };
+            setUser(userData);
+            localStorage.setItem('userInfo', JSON.stringify(userData));
             return { success: true };
         } catch (error) {
-            return {
-                success: false,
-                message: error.response && error.response.data.message ? error.response.data.message : error.message
-            };
+            return { success: false, message: error.message };
         }
     };
 
@@ -62,23 +60,21 @@ export const AuthProvider = ({ children }) => {
 
     const updateProfile = async (userData) => {
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${user.token}`,
-                },
-                withCredentials: true
-            };
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
-            const { data } = await axios.put(`${apiUrl}/api/auth/profile`, userData, config);
-            setUser(data);
-            localStorage.setItem('userInfo', JSON.stringify(data));
-            return { success: true };
+            const localUsers = JSON.parse(localStorage.getItem('local_users')) || [];
+            const index = localUsers.findIndex(u => u.id === user.id);
+
+            if (index !== -1) {
+                localUsers[index] = { ...localUsers[index], ...userData };
+                localStorage.setItem('local_users', JSON.stringify(localUsers));
+
+                const updatedUser = { ...user, ...userData };
+                setUser(updatedUser);
+                localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+                return { success: true };
+            }
+            return { success: false, message: "User not found" };
         } catch (error) {
-            return {
-                success: false,
-                message: error.response && error.response.data.message ? error.response.data.message : error.message
-            };
+            return { success: false, message: error.message };
         }
     };
 

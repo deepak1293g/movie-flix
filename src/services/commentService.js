@@ -1,27 +1,36 @@
-import axios from 'axios';
-
-const API_URL = 'http://localhost:5001/api/comments';
-
-const getAuthConfig = () => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    return {
-        headers: {
-            Authorization: `Bearer ${userInfo?.token}`,
-        },
-    };
-};
-
+// LocalStorage-based Comment Service
 export const addComment = async (commentData) => {
-    const { data } = await axios.post(API_URL, commentData, getAuthConfig());
-    return data;
+    try {
+        const comments = JSON.parse(localStorage.getItem('local_comments')) || [];
+        const newComment = {
+            ...commentData,
+            _id: Date.now().toString(),
+            createdAt: new Date()
+        };
+        comments.push(newComment);
+        localStorage.setItem('local_comments', JSON.stringify(comments));
+        return newComment;
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const getComments = async (contentId) => {
-    const { data } = await axios.get(`${API_URL}/${contentId}`);
-    return data;
+    try {
+        const comments = JSON.parse(localStorage.getItem('local_comments')) || [];
+        return comments.filter(c => c.contentId === contentId);
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const deleteComment = async (id) => {
-    const { data } = await axios.delete(`${API_URL}/${id}`, getAuthConfig());
-    return data;
+    try {
+        let comments = JSON.parse(localStorage.getItem('local_comments')) || [];
+        comments = comments.filter(c => c._id !== id);
+        localStorage.setItem('local_comments', JSON.stringify(comments));
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
 };

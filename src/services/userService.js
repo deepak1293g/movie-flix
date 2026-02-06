@@ -1,41 +1,69 @@
-import axios from 'axios';
-
-const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/users`;
-
-const getAuthConfig = () => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    return {
-        headers: {
-            Authorization: `Bearer ${userInfo?.token}`,
-        },
-    };
-};
-
+// LocalStorage-based User Service
 export const addToWatchlist = async (movieData) => {
-    const { data } = await axios.post(`${API_URL}/watchlist`, movieData, getAuthConfig());
-    return data;
+    try {
+        const watchlist = JSON.parse(localStorage.getItem('local_watchlist')) || [];
+        if (!watchlist.find(m => m.id === movieData.id)) {
+            watchlist.push(movieData);
+            localStorage.setItem('local_watchlist', JSON.stringify(watchlist));
+        }
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const removeFromWatchlist = async (id) => {
-    const { data } = await axios.delete(`${API_URL}/watchlist/${id}`, getAuthConfig());
-    return data;
+    try {
+        let watchlist = JSON.parse(localStorage.getItem('local_watchlist')) || [];
+        watchlist = watchlist.filter(m => m.id !== id);
+        localStorage.setItem('local_watchlist', JSON.stringify(watchlist));
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const getWatchlist = async () => {
-    const { data } = await axios.get(`${API_URL}/watchlist`, getAuthConfig());
-    return data;
+    try {
+        return JSON.parse(localStorage.getItem('local_watchlist')) || [];
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const updateWatchHistory = async (historyData) => {
-    const { data } = await axios.post(`${API_URL}/history`, historyData, getAuthConfig());
-    return data;
+    try {
+        let history = JSON.parse(localStorage.getItem('local_history')) || [];
+        const index = history.findIndex(h => h.movieId === historyData.movieId);
+
+        if (index !== -1) {
+            history[index] = { ...history[index], ...historyData, updatedAt: new Date() };
+        } else {
+            history.push({ ...historyData, updatedAt: new Date() });
+        }
+
+        localStorage.setItem('local_history', JSON.stringify(history));
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const getWatchHistory = async () => {
-    const { data } = await axios.get(`${API_URL}/history`, getAuthConfig());
-    return data;
+    try {
+        return JSON.parse(localStorage.getItem('local_history')) || [];
+    } catch (error) {
+        throw error;
+    }
 };
+
 export const removeFromWatchHistory = async (id) => {
-    const { data } = await axios.delete(`${API_URL}/history/${id}`, getAuthConfig());
-    return data;
+    try {
+        let history = JSON.parse(localStorage.getItem('local_history')) || [];
+        history = history.filter(h => h._id !== id && h.movieId !== id);
+        localStorage.setItem('local_history', JSON.stringify(history));
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
 };

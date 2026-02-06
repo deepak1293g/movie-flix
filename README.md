@@ -1,44 +1,26 @@
-# D-Flix Setup Guide
+# Movie-Flix Progressive Web App (PWA) 🍿
 
-## Prerequisites
-- **Node.js**: Installed.
-- **MongoDB**: Required for the database.
+Movie-Flix is a premium, high-performance movie streaming UI built with React, Vite, and Tailwind CSS. This version is a **Pure Frontend PWA** that uses `localStorage` for all user data (Authentication, Watchlist, History, and Comments), making it 100% serverless and production-ready for Vercel.
 
-## 1. Install & Start MongoDB (If not installed)
-If you don't have MongoDB installed, you can install it via Homebrew on Mac:
+## ✨ Features
+- **Premium Aesthetics**: High-end black and red theme with glassmorphism effects.
+- **PWA Ready**: Installable on Android, iOS, and Desktop.
+- **DB-less Architecture**: Uses Browser `localStorage` for persistent user sessions.
+- **Responsive Design**: Optimized for all screen sizes.
+- **Instant Data**: Blazing fast interactions with zero backend latency.
 
-```bash
-# 1. Tap the MongoDB Homebrew Tap
-brew tap mongodb/brew
+## 🚀 One-Click Deployment
+This project is optimized for **Vercel**. Simply connect your GitHub repository to Vercel and it will deploy automatically.
 
-# 2. Install MongoDB
-brew install mongodb-community@7.0
+## 🛠️ Local Setup
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-# 3. Start MongoDB Service
-brew services start mongodb-community@7.0
-```
-
-## 2. Start the Backend API
-In a terminal window:
-```bash
-cd /Users/macbookpro/Desktop/Projects/D-Flix
-# Set JWT Secret (Optional, defaults to 'secret')
-export JWT_SECRET=mysecretkey123 
-# Run Server
-node backend/server.js
-```
-*Server runs on port 5000.*
-
-## 3. Seed Database (Create Admin)
-*Only needs to be done once.*
-```bash
-node backend/seeder.js
-```
-
-## 4. Start the Frontend App
-In a **new** terminal window:
-```bash
-cd /Users/macbookpro/Desktop/Projects/D-Flix
-npm run dev
-```
-*Frontend runs on http://localhost:5173*
+*No MongoDB or Backend server required.*
