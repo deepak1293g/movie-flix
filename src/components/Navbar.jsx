@@ -51,26 +51,11 @@ const Navbar = () => {
             }`}>
             <div className="max-w-[1800px] mx-auto px-6 md:px-20 flex items-center justify-between">
 
-                {/* Logo with Arched "Bow" Effect */}
-                <Link to="/" className="flex items-center group z-50">
-                    <div className="flex items-center group-hover:scale-110 transition-all duration-500 py-2">
-                        {"MOVIEFLIX".split('').map((char, i) => {
-                            const offsets = [8, 5, 2, 0.5, 0, 0.5, 2, 5, 8];
-                            const rotations = [-12, -8, -4, -1.5, 0, 1.5, 4, 8, 12];
-                            return (
-                                <span
-                                    key={i}
-                                    style={{
-                                        transform: `translateY(${offsets[i]}px) rotate(${rotations[i]}deg)`,
-                                        display: 'inline-block'
-                                    }}
-                                    className="text-2xl sm:text-3xl font-black tracking-tighter text-brand-red drop-shadow-[0_0_20px_rgba(229,9,20,0.6)]"
-                                >
-                                    {char}
-                                </span>
-                            );
-                        })}
-                    </div>
+                {/* Logo */}
+                <Link to="/" className="flex items-center gap-2 z-50 group">
+                    <span className="text-2xl sm:text-3xl font-black tracking-tighter text-brand-red drop-shadow-[0_0_15px_rgba(229,9,20,0.5)] group-hover:scale-105 transition-transform duration-300">
+                        MOVIEFLIX
+                    </span>
                 </Link>
 
                 {/* Desktop Navigation Links */}
