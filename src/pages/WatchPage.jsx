@@ -665,15 +665,10 @@ const WatchPage = () => {
                         </div>
 
                         {/* Recommendations Section (Full Width Horizontal Scroll) */}
-                        <div className="space-y-8 pt-8 border-t border-white/5">
-                            <div className="flex items-center justify-between px-4 sm:px-0">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-1.5 h-8 bg-brand-red rounded-full shadow-[0_0_15px_rgba(229,9,20,0.5)]"></div>
-                                    <h2 className="text-xl font-black uppercase tracking-[0.2em] text-white/90">More Like This</h2>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full border border-white/5">Curated Recommendations</span>
-                                </div>
+                        <div className="space-y-8 pt-8 border-t border-white/5 px-4 sm:px-0">
+                            <div className="flex items-center gap-3">
+                                <div className="w-1.5 h-8 bg-brand-red rounded-full shadow-[0_0_15px_rgba(229,9,20,0.5)]"></div>
+                                <h2 className="text-xl font-black uppercase tracking-[0.2em] text-white/90">More Like This</h2>
                             </div>
 
                             <div className="relative group/scroll">
