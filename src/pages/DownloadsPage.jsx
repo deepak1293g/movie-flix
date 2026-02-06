@@ -76,36 +76,41 @@ const DownloadsPage = () => {
                                     {downloads.filter(d => d.progress === 100).map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-white/5 p-4 rounded-2xl flex flex-col sm:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
+                                            className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
                                         >
                                             {/* Item Image */}
-                                            <div className="w-full sm:w-52 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group">
+                                            <div className="w-full md:w-52 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                    <div className="w-12 h-12 rounded-full bg-brand-red flex items-center justify-center text-white">
+                                                        <Play size={20} fill="currentColor" className="ml-1" />
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             {/* Item Info */}
-                                            <div className="flex-1 flex flex-col justify-center gap-1.5 min-w-0 w-full">
-                                                <h3 className="text-xl font-bold truncate tracking-tight">{item.title}</h3>
-                                                <div className="flex items-center gap-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                                            <div className="flex-1 flex flex-col justify-center min-w-0 w-full">
+                                                <h3 className="text-xl font-bold truncate tracking-tight text-white mb-2">{item.title}</h3>
+                                                <div className="flex items-center gap-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
                                                     <span>•</span>
-                                                    <span className="text-gray-400">{item.size}</span>
+                                                    <span className="text-brand-red">{item.size}</span>
                                                 </div>
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex sm:flex-col gap-3 w-full sm:w-auto mt-4 sm:mt-0 pt-6 sm:pt-0 border-t sm:border-t-0 sm:border-l border-white/5 sm:pl-8">
+                                            <div className="flex md:flex-col gap-2 w-full md:w-auto mt-2 md:mt-0 pt-4 md:pt-0 md:border-l border-white/5 md:pl-6">
                                                 <Link
                                                     to={`/offline-watch/${item.id}/${item.slug}`}
-                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-xl"
+                                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-xl whitespace-nowrap"
                                                 >
                                                     Watch Now <Play size={14} fill="currentColor" />
                                                 </Link>
                                                 <button
                                                     onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2.5 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-8 py-3.5 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30"
+                                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-6 py-3 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
                                                 >
                                                     <Trash2 size={14} /> Remove
                                                 </button>
@@ -127,55 +132,56 @@ const DownloadsPage = () => {
                                     {downloads.filter(d => d.progress < 100).map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-white/5 p-4 rounded-2xl flex flex-col sm:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
+                                            className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
                                         >
-                                            {/* Item Image */}
-                                            <div className="w-full sm:w-52 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group">
+                                            {/* Item Image & Mini Progress */}
+                                            <div className="w-full md:w-56 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                                                 <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
                                                     <div
-                                                        className="h-full bg-red-600 transition-all duration-300 shadow-[0_0_8px_rgba(220,38,38,0.5)]"
+                                                        className="h-full bg-red-600 transition-all duration-300 shadow-[0_0_10px_#E50914]"
                                                         style={{ width: `${item.progress}%` }}
                                                     />
                                                 </div>
                                             </div>
 
-                                            {/* Item Info */}
-                                            <div className="flex-1 flex flex-col justify-center gap-1.5 min-w-0 w-full">
-                                                <h3 className="text-xl font-bold truncate tracking-tight">{item.title}</h3>
-                                                <div className="flex items-center gap-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                                            {/* Item Info & Main Progress */}
+                                            <div className="flex-1 flex flex-col justify-center min-w-0 w-full">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <h3 className="text-xl font-bold truncate tracking-tight text-white">{item.title}</h3>
+                                                    <span className="text-xs font-black text-brand-red bg-brand-red/10 px-2 py-0.5 rounded border border-brand-red/20">{item.progress}%</span>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
                                                 </div>
 
-                                                <div className="mt-4 w-full">
-                                                    <div className="flex justify-between items-center mb-1.5 px-0.5">
-                                                        <span className="text-[10px] text-gray-400 uppercase font-black tracking-widest">
-                                                            {item.isPaused ? 'Download Paused' : 'Downloading Content...'}
-                                                        </span>
-                                                        <span className="text-xs font-black text-white">{item.progress}%</span>
-                                                    </div>
-                                                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/10">
+                                                <div className="w-full space-y-2">
+                                                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
                                                         <div
-                                                            className={`h-full transition-all duration-500 shadow-[0_0_15px_rgba(220,38,38,0.3)] ${item.isPaused ? 'bg-gray-600' : 'bg-red-600'}`}
+                                                            className={`h-full transition-all duration-700 shadow-[0_0_15px_rgba(229,9,20,0.3)] ${item.isPaused ? 'bg-gray-600' : 'bg-red-600'}`}
                                                             style={{ width: `${item.progress}%` }}
                                                         />
                                                     </div>
+                                                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">
+                                                        {item.isPaused ? 'Download Paused' : 'Downloading Content...'}
+                                                    </p>
                                                 </div>
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex sm:flex-col gap-3 w-full sm:w-auto mt-4 sm:mt-0 pt-6 sm:pt-0 border-t sm:border-t-0 sm:border-l border-white/5 sm:pl-8">
+                                            <div className="flex md:flex-col gap-2 w-full md:w-auto mt-2 md:mt-0 pt-4 md:pt-0 md:border-l border-white/5 md:pl-6">
                                                 <button
                                                     onClick={() => togglePause(item.id)}
-                                                    className={`flex-1 sm:flex-none flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-xs transition-all ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
+                                                    className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${item.isPaused ? 'bg-white text-black hover:bg-gray-200 shadow-xl' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
                                                 >
                                                     {item.isPaused ? <><Play size={14} fill="currentColor" /> Resume</> : <><Pause size={14} /> Pause</>}
                                                 </button>
                                                 <button
                                                     onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2.5 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-8 py-3.5 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30"
+                                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-6 py-3 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
                                                 >
                                                     <Trash2 size={14} /> Remove
                                                 </button>
@@ -197,12 +203,7 @@ const DownloadsPage = () => {
                     </div>
                 )}
 
-                <div className="mt-12 flex items-center gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 max-w-2xl">
-                    <Info className="w-6 h-6 text-red-500 flex-shrink-0" />
-                    <p className="text-gray-400 text-sm">
-                        Downloaded content is stored on your device. Clearing browser cache may remove these downloads.
-                    </p>
-                </div>
+
             </div>
         </div>
     );
