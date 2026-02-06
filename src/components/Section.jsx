@@ -42,15 +42,15 @@ const Section = ({ title, children }) => {
         >
             <div className="max-w-[1600px] mx-auto">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight">
+                    <h2 className="text-xl sm:text-3xl md:text-4xl font-display font-black text-white tracking-tight">
                         {title}
                     </h2>
                     <Link
                         to={getBrowseLink()}
-                        className="flex items-center gap-2 text-brand-red hover:text-red-400 font-bold text-lg transition-all hover:scale-110 duration-300 group"
+                        className="flex items-center gap-2 text-brand-red hover:text-red-400 font-bold text-sm sm:text-lg transition-all hover:scale-110 duration-300 group"
                     >
                         See All
-                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
 

@@ -3,7 +3,7 @@ import { Search, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { searchContent } from '../services/tmdb';
 
-const SearchBar = () => {
+const SearchBar = ({ isMobile }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [showResults, setShowResults] = useState(false);
@@ -40,8 +40,8 @@ const SearchBar = () => {
     return (
         <div className="relative group z-50">
             <div className={`flex items-center gap-2 bg-white/5 backdrop-blur-md border transition-all duration-300 rounded-full overflow-hidden ${isFocused
-                    ? 'border-brand-red shadow-lg shadow-brand-red/20 bg-white/10'
-                    : 'border-white/10 hover:border-white/20'
+                ? 'border-brand-red shadow-lg shadow-brand-red/20 bg-white/10'
+                : 'border-white/10 hover:border-white/20'
                 }`}>
                 <Search className={`w-4 h-4 sm:w-5 sm:h-5 ml-3 sm:ml-4 transition-colors duration-300 ${isFocused ? 'text-brand-red' : 'text-gray-400'
                     }`} />
@@ -59,7 +59,7 @@ const SearchBar = () => {
                         setIsFocused(false);
                         setTimeout(() => setShowResults(false), 200);
                     }}
-                    className="bg-transparent text-white placeholder-gray-500 outline-none py-2 sm:py-2.5 pr-2 text-sm sm:text-base w-32 sm:w-48 md:w-56 transition-all duration-300"
+                    className={`bg-transparent text-white placeholder-gray-500 outline-none py-2 sm:py-2.5 pr-2 text-sm sm:text-base transition-all duration-300 ${isMobile ? 'flex-1' : 'w-32 sm:w-48 md:w-56'}`}
                 />
 
                 {query && (

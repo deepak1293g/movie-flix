@@ -72,7 +72,7 @@ const Home = () => {
             <Hero />
 
             {/* Personalized Content (only for logged in users) */}
-            <div className="relative z-20 -mt-24">
+            <div className="relative z-20 -mt-12 md:-mt-24">
                 {loading ? (
                     <Section title="Continue Watching">
                         {[...Array(6)].map((_, i) => <MovieCardSkeleton key={i} variant="landscape" />)}

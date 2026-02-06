@@ -56,7 +56,7 @@ const CategoryPage = () => {
     }, [genre]);
 
     return (
-        <div className="min-h-screen bg-[#0f1014] text-white pt-32 px-8 sm:px-16">
+        <div className="min-h-screen bg-[#0f1014] text-white pt-44 md:pt-32 px-8 sm:px-16">
             <h1 className="text-3xl font-display font-bold mb-16 uppercase border-l-4 border-brand-red pl-4">
                 {genre} Movies
             </h1>

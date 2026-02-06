@@ -39,7 +39,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen relative flex items-center justify-center px-4 py-20 overflow-hidden">
+        <div className="min-h-screen relative flex items-center justify-center px-4 pt-36 pb-20 md:pt-0 overflow-hidden">
             {/* Background Image with Overlay */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-110"

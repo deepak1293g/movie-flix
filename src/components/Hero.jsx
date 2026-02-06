@@ -118,7 +118,7 @@ const Hero = () => {
             ))}
 
             {/* Content */}
-            <div className={`relative h-full flex items-center px-6 sm:px-12 md:px-20 lg:px-24 max-w-[1600px] mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            <div className={`relative h-full flex items-center px-6 sm:px-12 md:px-20 lg:px-24 max-w-[1600px] mx-auto transition-all duration-1000 pt-24 md:pt-0 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}>
                 <div className="max-w-3xl space-y-2 sm:space-y-4 md:space-y-5">
                     {/* Category Badge */}
@@ -151,27 +151,27 @@ const Hero = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-4 pt-4 sm:pt-6">
+                    <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6">
                         <button
                             onClick={handlePlay}
-                            className="flex items-center gap-2 sm:gap-3 bg-brand-red hover:bg-red-700 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-black uppercase tracking-widest transition-all shadow-xl shadow-brand-red/30 group"
+                            className="flex items-center gap-2 sm:gap-3 bg-brand-red hover:bg-red-700 text-white px-4 sm:px-10 py-2.5 sm:py-4 rounded-xl font-black uppercase tracking-widest transition-all shadow-xl shadow-brand-red/30 group"
                         >
-                            <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current group-hover:scale-110 transition-transform" />
-                            <span className="text-sm sm:text-base">Play Now</span>
+                            <Play className="w-4 h-4 sm:w-6 sm:h-6 fill-current group-hover:scale-110 transition-transform" />
+                            <span className="text-[10px] sm:text-base">Play Now</span>
                         </button>
                         <button
                             onClick={toggleWatchlist}
-                            className={`flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-black uppercase tracking-widest transition-all border-2 ${isInWatchlist
+                            className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-10 py-2.5 sm:py-4 rounded-xl font-black uppercase tracking-widest transition-all border-2 ${isInWatchlist
                                 ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
                                 : 'bg-transparent border-white/40 text-white hover:bg-white hover:text-black hover:border-white'
                                 }`}
                         >
                             {isInWatchlist ? (
-                                <Check className="w-5 h-5 sm:w-6 sm:h-6" />
+                                <Check className="w-4 h-4 sm:w-6 sm:h-6" />
                             ) : (
-                                <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
+                                <Plus className="w-4 h-4 sm:w-6 sm:h-6" />
                             )}
-                            <span className="text-sm sm:text-base">{isInWatchlist ? 'In My List' : 'My List'}</span>
+                            <span className="text-[10px] sm:text-base">{isInWatchlist ? 'In My List' : 'My List'}</span>
                         </button>
                     </div>
 
