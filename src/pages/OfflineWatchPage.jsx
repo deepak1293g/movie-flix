@@ -18,7 +18,6 @@ const OfflineWatchPage = () => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [showControls, setShowControls] = useState(true);
-    const [isManualLandscape, setIsManualLandscape] = useState(false);
     const [suppressClick, setSuppressClick] = useState(false);
     const [initialResumeTime, setInitialResumeTime] = useState(0);
     const [historyLoaded, setHistoryLoaded] = useState(false);
