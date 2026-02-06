@@ -101,7 +101,7 @@ const DownloadsPage = () => {
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 sm:border-l border-white/5 sm:pl-6">
+                                            <div className="flex sm:flex-col gap-4 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 sm:border-l border-white/5 sm:pl-6">
                                                 <Link
                                                     to={`/offline-watch/${item.id}/${item.slug}`}
                                                     className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-xl whitespace-nowrap"
