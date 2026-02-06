@@ -1,0 +1,21 @@
+{
+    "short_name": "D-Flix",
+    "name": "D-Flix Movieflix",
+    "name_hindi": "डी-फ्लिक्स",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#E50914",
+    "background_color": "#0f1014"
+}

@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@config "../tailwind.config.js";
+
+:root {
+  --background-deep: #050505;
+  --background-card: #121212;
+  --brand-red: #E50914;
+  --brand-red-glow: rgba(229, 9, 20, 0.4);
+}
+
+@layer base {
+  body {
+    background-color: var(--background-deep);
+  }
+}
+
+@layer utilities {
+  .text-shadow-premium {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  }
+
+  .glass-dark {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .red-glow-border {
+    box-shadow: 0 0 15px var(--brand-red-glow);
+    border-color: rgba(229, 9, 20, 0.3);
+  }
+
+  .premium-gradient-red {
+    background: linear-gradient(135deg, #E50914 0%, #90050B 100%);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Enforce pointer cursor on all buttons */
+button {
+  cursor: pointer;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1014;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+}
