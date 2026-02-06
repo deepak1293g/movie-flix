@@ -30,6 +30,7 @@ const WatchPage = () => {
     const [isQualityMenuOpen, setIsQualityMenuOpen] = useState(false);
     const [isQualityLoading, setIsQualityLoading] = useState(false);
     const [suppressClick, setSuppressClick] = useState(false);
+    const [historyLoaded, setHistoryLoaded] = useState(false);
     const [initialResumeTime, setInitialResumeTime] = useState(0);
     const [tapCue, setTapCue] = useState(null); // { type: 'forward' | 'backward' }
     const [isManualLandscape, setIsManualLandscape] = useState(false);
