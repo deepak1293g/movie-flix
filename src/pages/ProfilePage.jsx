@@ -37,7 +37,7 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f1014] text-white pt-60 md:pt-24 px-4 sm:px-8 flex justify-center">
+        <div className="min-h-screen bg-[#0f1014] text-white pt-32 md:pt-24 px-4 sm:px-8 flex justify-center">
             <div className="w-full max-w-2xl">
                 <h1 className="text-3xl font-display font-bold mb-8 border-l-4 border-brand-red pl-4">My Profile</h1>
 
