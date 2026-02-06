@@ -76,10 +76,10 @@ const DownloadsPage = () => {
                                     {downloads.filter(d => d.progress === 100).map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
+                                            className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
                                         >
                                             {/* Item Image */}
-                                            <div className="w-full md:w-52 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
+                                            <div className="w-full sm:w-52 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                     <div className="w-12 h-12 rounded-full bg-brand-red flex items-center justify-center text-white">
@@ -101,16 +101,16 @@ const DownloadsPage = () => {
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex md:flex-col gap-2 w-full md:w-auto mt-2 md:mt-0 pt-4 md:pt-0 md:border-l border-white/5 md:pl-6">
+                                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 sm:border-l border-white/5 sm:pl-6">
                                                 <Link
                                                     to={`/offline-watch/${item.id}/${item.slug}`}
-                                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-xl whitespace-nowrap"
+                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-xl whitespace-nowrap"
                                                 >
                                                     Watch Now <Play size={14} fill="currentColor" />
                                                 </Link>
                                                 <button
                                                     onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-6 py-3 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
+                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-6 py-3 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
                                                 >
                                                     <Trash2 size={14} /> Remove
                                                 </button>
