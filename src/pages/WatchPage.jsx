@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
-import { Download, Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check, RotateCcw } from 'lucide-react';
+import { Download, Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
 import ContentContext from '../context/ContentContext';
 import { fetchDetails, fetchSeasonDetails, fetchMovies } from '../services/tmdb';
@@ -33,7 +33,6 @@ const WatchPage = () => {
     const [historyLoaded, setHistoryLoaded] = useState(false);
     const [initialResumeTime, setInitialResumeTime] = useState(0);
     const [tapCue, setTapCue] = useState(null); // { type: 'forward' | 'backward' }
-    const [isManualLandscape, setIsManualLandscape] = useState(false);
 
     useEffect(() => {
         const handleFullscreenChange = () => {
@@ -393,7 +392,7 @@ const WatchPage = () => {
                 <div className="w-full">
                     <div
                         ref={playerContainerRef}
-                        className={`relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500 ${isManualLandscape ? 'fixed inset-0 z-[9999] !max-w-none h-screen w-screen' : ''}`}
+                        className="relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500"
                         onMouseEnter={() => setShowControls(true)}
                         onMouseLeave={() => {
                             if (!isQualityMenuOpen) {
@@ -557,14 +556,6 @@ const WatchPage = () => {
                                             <Maximize className="w-5 h-5 sm:w-6 sm:h-6" />
                                         </button>
 
-                                        {/* Mobile Rotation Fallback */}
-                                        <button
-                                            onClick={() => setIsManualLandscape(!isManualLandscape)}
-                                            className="md:hidden text-white hover:text-brand-red transition-all"
-                                            title="Rotate Player"
-                                        >
-                                            <RotateCcw className={`w-5 h-5 ${isManualLandscape ? 'rotate-90 text-brand-red' : ''}`} />
-                                        </button>
                                     </div>
                                 </div>
                             </div>
