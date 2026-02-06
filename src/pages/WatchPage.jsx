@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
-import { Download, Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check } from 'lucide-react';
+import { Download, Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check, RotateCcw } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
 import ContentContext from '../context/ContentContext';
 import { fetchDetails, fetchSeasonDetails, fetchMovies } from '../services/tmdb';
@@ -30,9 +30,30 @@ const WatchPage = () => {
     const [isQualityMenuOpen, setIsQualityMenuOpen] = useState(false);
     const [isQualityLoading, setIsQualityLoading] = useState(false);
     const [suppressClick, setSuppressClick] = useState(false);
-    const [historyLoaded, setHistoryLoaded] = useState(false);
     const [initialResumeTime, setInitialResumeTime] = useState(0);
     const [tapCue, setTapCue] = useState(null); // { type: 'forward' | 'backward' }
+    const [isManualLandscape, setIsManualLandscape] = useState(false);
+
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            const isF = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+            if (isF && window.innerWidth < 1024) {
+                setTimeout(() => {
+                    if (window.screen?.orientation?.lock) {
+                        window.screen.orientation.lock('landscape').catch(() => { });
+                    } else if (window.screen?.webkitLockOrientation) {
+                        window.screen.webkitLockOrientation('landscape');
+                    }
+                }, 200);
+            }
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        return () => {
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+        };
+    }, []);
 
     useEffect(() => {
         setHistoryLoaded(false);
@@ -150,25 +171,57 @@ const WatchPage = () => {
         setIsMuted(videoRef.current.muted);
     };
 
-    const toggleFullscreen = () => {
+    const toggleFullscreen = async () => {
         if (!playerContainerRef.current) return;
 
         setSuppressClick(true);
         setTimeout(() => setSuppressClick(false), 400);
 
-        if (!document.fullscreenElement) {
-            playerContainerRef.current.requestFullscreen().then(() => {
-                // Try to lock landscape on mobile
-                if (window.screen?.orientation?.lock) {
-                    window.screen.orientation.lock('landscape').catch(() => {
-                        // Silent fail if browser doesn't support locking
-                    });
+        try {
+            if (!document.fullscreenElement &&
+                !document.webkitFullscreenElement &&
+                !document.mozFullScreenElement &&
+                !document.msFullscreenElement) {
+
+                const element = playerContainerRef.current;
+                const requestFS = element.requestFullscreen ||
+                    element.webkitRequestFullscreen ||
+                    element.mozRequestFullScreen ||
+                    element.msRequestFullscreen;
+
+                if (requestFS) {
+                    await requestFS.call(element);
+
+                    // Try to lock landscape on mobile after entering fullscreen
+                    if (window.innerWidth < 1024) {
+                        try {
+                            if (window.screen?.orientation?.lock) {
+                                await window.screen.orientation.lock('landscape');
+                            } else if (window.screen?.lockOrientation) {
+                                window.screen.lockOrientation('landscape');
+                            } else if (window.screen?.webkitLockOrientation) {
+                                window.screen.webkitLockOrientation('landscape');
+                            }
+                        } catch (lockError) {
+                            console.warn("Orientation lock failed:", lockError);
+                        }
+                    }
                 }
-            }).catch(err => {
-                toast.error(`Error attempting to enable full-screen mode: ${err.message}`);
-            });
-        } else {
-            document.exitFullscreen();
+            } else {
+                const exitFS = document.exitFullscreen ||
+                    document.webkitExitFullscreen ||
+                    document.mozCancelFullScreen ||
+                    document.msExitFullscreen;
+                if (exitFS) {
+                    await exitFS.call(document);
+                    // Unlock orientation when exiting
+                    if (window.screen?.orientation?.unlock) {
+                        window.screen.orientation.unlock();
+                    }
+                }
+            }
+        } catch (err) {
+            toast.error(`Fullscreen error: ${err.message}`);
         }
     };
 
@@ -339,7 +392,7 @@ const WatchPage = () => {
                 <div className="w-full">
                     <div
                         ref={playerContainerRef}
-                        className="relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group"
+                        className={`relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500 ${isManualLandscape ? 'fixed inset-0 z-[9999] !max-w-none h-screen w-screen' : ''}`}
                         onMouseEnter={() => setShowControls(true)}
                         onMouseLeave={() => {
                             if (!isQualityMenuOpen) {
@@ -501,6 +554,15 @@ const WatchPage = () => {
 
                                         <button onClick={toggleFullscreen} className="text-white hover:text-brand-red transition-all">
                                             <Maximize className="w-5 h-5 sm:w-6 sm:h-6" />
+                                        </button>
+
+                                        {/* Mobile Rotation Fallback */}
+                                        <button
+                                            onClick={() => setIsManualLandscape(!isManualLandscape)}
+                                            className="md:hidden text-white hover:text-brand-red transition-all"
+                                            title="Rotate Player"
+                                        >
+                                            <RotateCcw className={`w-5 h-5 ${isManualLandscape ? 'rotate-90 text-brand-red' : ''}`} />
                                         </button>
                                     </div>
                                 </div>
