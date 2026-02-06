@@ -132,10 +132,10 @@ const DownloadsPage = () => {
                                     {downloads.filter(d => d.progress < 100).map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
+                                            className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
                                         >
                                             {/* Item Image & Mini Progress */}
-                                            <div className="w-full md:w-56 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
+                                            <div className="w-full sm:w-56 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                                                 <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
                                                     <div
@@ -172,16 +172,16 @@ const DownloadsPage = () => {
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex md:flex-col gap-2 w-full md:w-auto mt-2 md:mt-0 pt-4 md:pt-0 md:border-l border-white/5 md:pl-6">
+                                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 sm:border-l border-white/5 sm:pl-6">
                                                 <button
                                                     onClick={() => togglePause(item.id)}
-                                                    className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${item.isPaused ? 'bg-white text-black hover:bg-gray-200 shadow-xl' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
+                                                    className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${item.isPaused ? 'bg-white text-black hover:bg-gray-200 shadow-xl' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
                                                 >
                                                     {item.isPaused ? <><Play size={14} fill="currentColor" /> Resume</> : <><Pause size={14} /> Pause</>}
                                                 </button>
                                                 <button
                                                     onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-6 py-3 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
+                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-500 hover:text-red-500 px-6 py-3 rounded-xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
                                                 >
                                                     <Trash2 size={14} /> Remove
                                                 </button>
