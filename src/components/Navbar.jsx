@@ -117,9 +117,9 @@ const Navbar = () => {
                                 </div>
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2 sm:gap-4">
-                                <Link to="/login" className="text-sm sm:text-base font-bold hover:text-brand-red transition-all hover:scale-110 duration-300">Login</Link>
-                                <Link to="/register" className="bg-gradient-to-r from-brand-red to-red-700 text-white hover:from-red-700 hover:to-brand-red px-4 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base font-black transition-all duration-300 transform hover:scale-110 shadow-lg shadow-brand-red/40 hover:shadow-brand-red/60">Sign Up</Link>
+                            <div className="flex items-center gap-2 sm:gap-4 md:gap-3">
+                                <Link to="/login" className="text-sm sm:text-base md:text-xs lg:text-base font-bold hover:text-brand-red transition-all hover:scale-110 duration-300">Login</Link>
+                                <Link to="/register" className="hidden lg:block bg-gradient-to-r from-brand-red to-red-700 text-white hover:from-red-700 hover:to-brand-red px-4 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base font-black transition-all duration-300 transform hover:scale-110 shadow-lg shadow-brand-red/40 hover:shadow-brand-red/60">Sign Up</Link>
                             </div>
                         )}
                     </div>
