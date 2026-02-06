@@ -136,7 +136,7 @@ const Navbar = () => {
             </div>
 
             {!mobileMenuOpen && (
-                <div className="md:hidden px-6 pb-2">
+                <div className="md:hidden px-6 pb-4 mt-2">
                     <SearchBar isMobile={true} />
                 </div>
             )}
