@@ -154,11 +154,15 @@ const WatchPage = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isPlaying, isMuted, showControls]);
 
-    const togglePlay = () => {
+    const togglePlay = async () => {
         if (!videoRef.current) return;
         if (videoRef.current.paused) {
-            videoRef.current.play();
-            setIsPlaying(true);
+            try {
+                await videoRef.current.play();
+                setIsPlaying(true);
+            } catch (err) {
+                console.warn("Playback interrupted or prevented:", err);
+            }
         } else {
             videoRef.current.pause();
             setIsPlaying(false);
@@ -297,13 +301,17 @@ const WatchPage = () => {
         }
     };
 
-    const handleProgressChange = (e) => {
+    const handleProgressChange = async (e) => {
         if (!videoRef.current) return;
         const time = e.target.value;
         videoRef.current.currentTime = time;
         setCurrentTime(time);
-        videoRef.current.play();
-        setIsPlaying(true);
+        try {
+            await videoRef.current.play();
+            setIsPlaying(true);
+        } catch (err) {
+            console.warn("Playback failed after seek:", err);
+        }
     };
 
     const handleMouseMoveAction = (e) => {
@@ -330,10 +338,16 @@ const WatchPage = () => {
         setIsQualityMenuOpen(false);
         setCurrentQuality(quality);
 
-        setTimeout(() => {
+        setTimeout(async () => {
             if (videoRef.current) {
                 videoRef.current.currentTime = currentTimeSave;
-                if (isPlaying) videoRef.current.play();
+                if (isPlaying) {
+                    try {
+                        await videoRef.current.play();
+                    } catch (err) {
+                        console.warn("Playback failed after quality change:", err);
+                    }
+                }
             }
             setIsQualityLoading(false);
             toast.success(`Switched to ${quality}`, {

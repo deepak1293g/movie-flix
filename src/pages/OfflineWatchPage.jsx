@@ -90,11 +90,15 @@ const OfflineWatchPage = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isPlaying, isMuted, showControls]);
 
-    const togglePlay = () => {
+    const togglePlay = async () => {
         if (!videoRef.current) return;
         if (videoRef.current.paused) {
-            videoRef.current.play();
-            setIsPlaying(true);
+            try {
+                await videoRef.current.play();
+                setIsPlaying(true);
+            } catch (err) {
+                console.warn("Offline playback interrupted:", err);
+            }
         } else {
             videoRef.current.pause();
             setIsPlaying(false);
@@ -168,13 +172,17 @@ const OfflineWatchPage = () => {
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
-    const handleProgressChange = (e) => {
+    const handleProgressChange = async (e) => {
         if (!videoRef.current) return;
         const time = e.target.value;
         videoRef.current.currentTime = time;
         setCurrentTime(time);
-        videoRef.current.play();
-        setIsPlaying(true);
+        try {
+            await videoRef.current.play();
+            setIsPlaying(true);
+        } catch (err) {
+            console.warn("Offline playback failed after seek:", err);
+        }
     };
 
     const handleMouseMoveAction = (e) => {
