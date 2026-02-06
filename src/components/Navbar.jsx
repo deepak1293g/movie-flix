@@ -58,15 +58,15 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                {/* Desktop Navigation Links */}
-                <div className="hidden lg:flex items-center gap-12">
+                {/* Desktop/Tablet Navigation Links */}
+                <div className="hidden md:flex items-center gap-4 lg:gap-12">
                     {navLinks.map((link) => (
                         <Link
                             key={link.path}
                             to={link.path}
-                            className={`relative group font-black tracking-widest text-[15px] transition-all duration-300 flex items-center gap-2 ${isActive(link.path) ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+                            className={`relative group font-black tracking-widest text-[11px] lg:text-[15px] transition-all duration-300 flex items-center gap-1 lg:gap-2 ${isActive(link.path) ? 'text-white' : 'text-gray-400 hover:text-white'}`}
                         >
-                            {link.icon && <link.icon className={`w-4 h-4 transition-colors ${isActive(link.path) ? 'text-brand-red' : 'group-hover:text-brand-red'}`} />}
+                            {link.icon && <link.icon className={`w-3 h-3 lg:w-4 lg:h-4 transition-colors ${isActive(link.path) ? 'text-brand-red' : 'group-hover:text-brand-red'}`} />}
                             {link.name}
                             <div className={`absolute -bottom-2 left-0 h-0.5 bg-brand-red transition-all duration-500 shadow-[0_0_10px_#E50914] ${isActive(link.path) ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-1/2 group-hover:opacity-50'}`} />
                         </Link>
