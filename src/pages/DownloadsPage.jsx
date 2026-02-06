@@ -135,7 +135,7 @@ const DownloadsPage = () => {
                                             className="bg-white/5 p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-6 border border-white/10 hover:bg-white/[0.07] transition-all"
                                         >
                                             {/* Item Image & Mini Progress */}
-                                            <div className="w-full sm:w-56 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
+                                            <div className="w-full sm:w-52 aspect-video flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-900 group shadow-lg">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                                                 <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
                                                     <div
@@ -152,27 +152,27 @@ const DownloadsPage = () => {
                                                     <span className="text-xs font-black text-brand-red bg-brand-red/10 px-2 py-0.5 rounded border border-brand-red/20">{item.progress}%</span>
                                                 </div>
 
-                                                <div className="flex items-center gap-3 text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">
+                                                <div className="flex items-center gap-3 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
                                                 </div>
 
                                                 <div className="w-full space-y-2">
-                                                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
+                                                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden border border-white/10">
                                                         <div
                                                             className={`h-full transition-all duration-700 shadow-[0_0_15px_rgba(229,9,20,0.3)] ${item.isPaused ? 'bg-gray-600' : 'bg-red-600'}`}
                                                             style={{ width: `${item.progress}%` }}
                                                         />
                                                     </div>
                                                     <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">
-                                                        {item.isPaused ? 'Download Paused' : 'Downloading Content...'}
+                                                        {item.isPaused ? 'Download Paused' : 'Downloading...'}
                                                     </p>
                                                 </div>
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 sm:border-l border-white/5 sm:pl-6">
+                                            <div className="flex sm:flex-col gap-4 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 sm:border-l border-white/5 sm:pl-6">
                                                 <button
                                                     onClick={() => togglePause(item.id)}
                                                     className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${item.isPaused ? 'bg-white text-black hover:bg-gray-200 shadow-xl' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
