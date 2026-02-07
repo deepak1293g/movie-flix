@@ -617,49 +617,6 @@ const WatchPage = () => {
                     <div className="space-y-12 mt-8">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                             <div className="lg:col-span-2 space-y-12">
-                                {type === 'tv' && (
-                                    <div className="space-y-6">
-
-                                        {/* Full Width Episode List */}
-                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                            {episodesList.map(ep => (
-                                                <div
-                                                    key={ep.id}
-                                                    onClick={() => handleEpisodeSelect(ep)}
-                                                    className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all duration-300 border group ${episode === ep.episode_number ? 'bg-white/5 border-white/20 shadow-xl' : 'bg-transparent border-transparent hover:bg-white/[0.03]'}`}
-                                                >
-                                                    <div className="relative w-28 aspect-video flex-shrink-0 rounded-lg overflow-hidden shadow-sm bg-gray-900">
-                                                        <img src={ep.still_path || content.backdropUrl} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-                                                        <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity ${episode === ep.episode_number ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                                                            {episode === ep.episode_number ? (
-                                                                <div className="flex gap-1 items-end h-3">
-                                                                    <div className="w-0.5 bg-brand-red animate-[bounce_1s_infinite]"></div>
-                                                                    <div className="w-0.5 bg-brand-red animate-[bounce_1.2s_infinite]"></div>
-                                                                    <div className="w-0.5 bg-brand-red animate-[bounce_0.8s_infinite]"></div>
-                                                                </div>
-                                                            ) : (
-                                                                <Play className="w-5 h-5 fill-white text-white opacity-90" />
-                                                            )}
-                                                        </div>
-                                                        <div className="absolute bottom-1 left-1 bg-black/60 px-1.5 py-0.5 rounded text-[9px] font-bold text-white backdrop-blur-sm">
-                                                            E{ep.episode_number}
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="flex-1 min-w-0 py-1">
-                                                        <h3 className={`font-bold text-sm leading-tight transition-colors mb-1 ${episode === ep.episode_number ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
-                                                            {ep.name}
-                                                        </h3>
-                                                        <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed font-medium">
-                                                            {ep.overview || "No description available."}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
                                 <div className="space-y-4">
                                     <h2 className="text-lg font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Storyline</h2>
                                     <p className="text-gray-300 text-lg leading-relaxed max-w-4xl pt-2">{content.description}</p>
