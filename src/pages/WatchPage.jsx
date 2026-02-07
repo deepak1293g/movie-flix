@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
-import { Download, Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check } from 'lucide-react';
+import { Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
 import ContentContext from '../context/ContentContext';
 import { fetchDetails, fetchSeasonDetails, fetchMovies } from '../services/tmdb';
@@ -12,7 +12,7 @@ const WatchPage = () => {
     const [searchParams] = useSearchParams();
     const type = searchParams.get('type') || 'movie';
     const { user } = useContext(AuthContext);
-    const { isInWatchlist: isAlreadyInList, isDownloaded: isAlreadyDownloaded, toggleWatchlist, addDownload } = useContext(ContentContext);
+    const { isInWatchlist: isAlreadyInList, toggleWatchlist } = useContext(ContentContext);
 
     const [content, setContent] = useState(null);
     const [currentVideoUrl, setCurrentVideoUrl] = useState('');
@@ -372,10 +372,6 @@ const WatchPage = () => {
         toggleWatchlist(content);
     };
 
-    const handleDownloadClick = () => {
-        addDownload(content);
-    };
-
     const handleTouchInteraction = (e) => {
         const now = Date.now();
         const rect = playerContainerRef.current.getBoundingClientRect();
@@ -603,13 +599,6 @@ const WatchPage = () => {
                                 {isAlreadyInList(id) ? <Check className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" /> : <Plus className="w-4 h-4 sm:w-5 sm:h-5" />}
                                 <span>{isAlreadyInList(id) ? 'In My List' : 'Add to List'}</span>
                             </button>
-                            <button
-                                onClick={handleDownloadClick}
-                                className={`flex-1 flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-xl transition-all font-bold text-xs sm:text-base whitespace-nowrap ${isAlreadyDownloaded(id) ? 'bg-green-600 text-white' : 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/20'}`}
-                            >
-                                <Download className="w-4 h-4 sm:w-5 sm:h-5" />
-                                <span>{isAlreadyDownloaded(id) ? 'Downloaded' : 'Download'}</span>
-                            </button>
                         </div>
                     </div>
 
@@ -734,7 +723,7 @@ const WatchPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

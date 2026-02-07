@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Download, User, LogOut, ChevronDown, Film, Tv, Menu, X, List } from 'lucide-react';
+import { User, LogOut, ChevronDown, Film, Tv, Menu, X, List } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SearchBar from './SearchBar';
 import AuthContext from '../context/AuthContext';
@@ -38,8 +38,7 @@ const Navbar = () => {
 
     const mobileUserLinks = [
         { name: 'My List', path: '/mylist', icon: List },
-        { name: 'Profile', path: '/profile', icon: User },
-        { name: 'Downloads', path: '/downloads', icon: Download }
+        { name: 'Profile', path: '/profile', icon: User }
     ];
 
     return (

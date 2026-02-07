@@ -10,8 +10,6 @@ import Register from './pages/Register';
 import WatchPage from './pages/WatchPage';
 import CategoryPage from './pages/CategoryPage';
 import ProfilePage from './pages/ProfilePage';
-import DownloadsPage from './pages/DownloadsPage';
-import OfflineWatchPage from './pages/OfflineWatchPage';
 import BrowsePage from './pages/BrowsePage';
 import MyListPage from './pages/MyListPage';
 import ContactPage from './pages/ContactPage';
@@ -45,8 +43,6 @@ function App() {
           <Route path="/watch/:id/:slug?" element={<PageWrapper><WatchPage /></PageWrapper>} />
           <Route path="/category/:genre" element={<PageWrapper><CategoryPage /></PageWrapper>} />
           <Route path="/profile" element={<PageWrapper><ProfilePage /></PageWrapper>} />
-          <Route path="/downloads" element={<PageWrapper><DownloadsPage /></PageWrapper>} />
-          <Route path="/offline-watch/:id/:slug?" element={<PageWrapper><OfflineWatchPage /></PageWrapper>} />
           <Route path="/browse/:type" element={<PageWrapper><BrowsePage /></PageWrapper>} />
           <Route path="/mylist" element={<PageWrapper><MyListPage /></PageWrapper>} />
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />

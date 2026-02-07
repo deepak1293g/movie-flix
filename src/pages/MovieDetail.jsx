@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Play, Download, Star, Check } from 'lucide-react';
+import { Play, Star, Check, Plus } from 'lucide-react';
 import axios from 'axios';
 import ContentContext from '../context/ContentContext';
 
@@ -8,7 +8,7 @@ const MovieDetail = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);
 
-    const { isDownloaded, addDownload, toggleWatchlist, isInWatchlist } = useContext(ContentContext);
+    const { toggleWatchlist, isInWatchlist } = useContext(ContentContext);
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -74,13 +74,6 @@ const MovieDetail = () => {
                         >
                             {isInWatchlist(movieStatusId) ? <Check className="w-5 h-5 text-brand-red" /> : <Plus className="w-5 h-5" />}
                             {isInWatchlist(movieStatusId) ? 'Already Added' : 'Add to List'}
-                        </button>
-                        <button
-                            onClick={() => addDownload(movie)}
-                            className={`flex items-center gap-3 px-6 py-4 rounded-full font-black uppercase tracking-widest text-xs transition-all border ${isDownloaded(movieStatusId) ? 'bg-green-600/10 border-green-600/30 text-green-500' : 'bg-white/5 hover:bg-white/10 text-white border-white/10'}`}
-                            title="Download for offline"
-                        >
-                            <Download className="w-5 h-5" />
                         </button>
                     </div>
                 </div>

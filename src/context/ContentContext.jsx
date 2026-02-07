@@ -8,15 +8,10 @@ const ContentContext = createContext();
 export const ContentProvider = ({ children }) => {
     const { user } = useContext(AuthContext);
     const [watchlist, setWatchlist] = useState([]);
-    const [downloads, setDownloads] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // Initial Load
     useEffect(() => {
-        // Load Downloads from LocalStorage
-        const storedDownloads = JSON.parse(localStorage.getItem('downloads') || '[]');
-        setDownloads(storedDownloads);
-
         // Load Watchlist if User Logged In
         const fetchWatchlist = async () => {
             if (user) {
@@ -37,8 +32,6 @@ export const ContentProvider = ({ children }) => {
 
     // Helper Functions
     const isInWatchlist = (id) => watchlist.some(item => item.id.toString() === id.toString() || (item._id && item._id.toString() === id.toString()));
-
-    const isDownloaded = (id) => downloads.some(item => (item.id.toString() === id.toString() || (item._id && item._id.toString() === id.toString())) && item.progress === 100);
 
     const toggleWatchlist = async (movie) => {
         if (!user) {
@@ -70,53 +63,12 @@ export const ContentProvider = ({ children }) => {
         }
     };
 
-    const addDownload = (movie) => {
-        if (!user) {
-            toast.error("Please login to download content.");
-            return;
-        }
-
-        const id = (movie.id || movie._id).toString();
-        const alreadyInList = downloads.some(d => (d.id || d._id).toString() === id);
-
-        if (alreadyInList) {
-            toast("Already in Downloads", { icon: '📂' });
-            return;
-        }
-
-        const downloadItem = {
-            id: id,
-            title: movie.title,
-            type: movie.type || 'movie',
-            slug: movie.title.toLowerCase().replace(/ /g, '-'),
-            image: movie.thumbnailUrl || movie.backdropUrl || movie.image,
-            size: "1.5 GB",
-            progress: 0,
-            date: 'Just now'
-        };
-
-        const updated = [...downloads, downloadItem];
-        setDownloads(updated);
-        localStorage.setItem('downloads', JSON.stringify(updated));
-        toast.success("Added to Downloads!");
-    };
-
-    const removeDownload = (id) => {
-        const updated = downloads.filter(d => (d.id || d._id).toString() !== id.toString());
-        setDownloads(updated);
-        localStorage.setItem('downloads', JSON.stringify(updated));
-    };
-
     return (
         <ContentContext.Provider value={{
             watchlist,
-            downloads,
             loading,
             isInWatchlist,
-            isDownloaded,
-            toggleWatchlist,
-            addDownload,
-            removeDownload
+            toggleWatchlist
         }}>
             {children}
         </ContentContext.Provider>
