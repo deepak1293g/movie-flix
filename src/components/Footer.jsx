@@ -41,15 +41,14 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white font-bold tracking-widest text-sm mb-8">Navigation</h3>
                         <ul className="space-y-4">
-                            {['Home', 'Movies', 'Series', 'My List', 'Downloads'].map((item) => (
+                            {['Home', 'Movies', 'Series', 'My List'].map((item) => (
                                 <li key={item}>
                                     <Link
                                         to={
                                             item === 'Home' ? '/' :
                                                 item === 'Movies' ? '/browse/movies' :
                                                     item === 'Series' ? '/browse/series' :
-                                                        item === 'My List' ? '/mylist' 
-                                                            
+                                                        item === 'My List' ? '/mylist' : '/'
                                         }
                                         className="text-gray-400 hover:text-brand-red text-[15px] transition-colors duration-200 flex items-center gap-2 group"
                                     >
