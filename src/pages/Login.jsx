@@ -40,13 +40,11 @@ const Login = () => {
 
             {/* Content Container */}
             <div className="relative z-10 w-full max-w-md">
-                <div className="text-center mb-8">
-                    <h1 className="text-5xl font-black tracking-tighter text-brand-red mb-2 drop-shadow-2xl">MOVIEFLIX</h1>
-                    <p className="text-gray-400 uppercase tracking-[0.3em] text-xs font-bold">Premium Cinema Experience</p>
-                </div>
 
-                <div className="bg-black/60 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl">
-                    <h2 className="text-3xl font-display font-black text-white mb-8">Sign In</h2>
+                <div className="bg-[#0f1014]/40 backdrop-blur-[40px] border border-white/10 p-8 sm:p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group/card transition-all duration-700 hover:border-brand-red/20">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-red/50 to-transparent"></div>
+                    <h2 className="text-4xl font-display font-black text-white mb-2">Welcome Back</h2>
+                    <p className="text-gray-400 text-sm mb-10">Sign in to continue your journey</p>
 
                     <form onSubmit={handleSubmit} className="space-y-6 text-left">
                         <div className="space-y-2">
@@ -57,7 +55,7 @@ const Login = () => {
                                     type="email"
                                     required
                                     placeholder="your@email.com"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-12 py-4 focus:outline-none focus:border-brand-red/50 focus:bg-white/10 transition-all text-white placeholder:text-gray-600"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-12 py-4 focus:outline-none focus:border-brand-red focus:bg-white/10 transition-all text-white placeholder:text-gray-600 focus:ring-4 focus:ring-brand-red/10"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -72,7 +70,7 @@ const Login = () => {
                                     type="password"
                                     required
                                     placeholder="••••••••"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-12 py-4 focus:outline-none focus:border-brand-red/50 focus:bg-white/10 transition-all text-white placeholder:text-gray-600"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-12 py-4 focus:outline-none focus:border-brand-red focus:bg-white/10 transition-all text-white placeholder:text-gray-600 focus:ring-4 focus:ring-brand-red/10"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />

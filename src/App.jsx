@@ -31,11 +31,12 @@ const PageWrapper = ({ children }) => (
 
 function App() {
   const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-brand-red selection:text-white px-4 sm:px-6 lg:px-8">
       <ScrollToTop />
-      <Navbar />
+      {!isAuthPage && <Navbar />}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
@@ -51,7 +52,7 @@ function App() {
           <Route path="/contact" element={<PageWrapper><ContactPage /></PageWrapper>} />
         </Routes>
       </AnimatePresence>
-      <Footer />
+      {!isAuthPage && <Footer />}
       <Toaster position="bottom-center" toastOptions={{
         style: {
           background: 'rgba(18, 18, 18, 0.9)',
