@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, X, ChevronDown, Info, Check, Download, Plus } from 'lucide-react';
+import { Play, X, ChevronDown, Info, Check, Plus } from 'lucide-react';
 import ContentContext from '../context/ContentContext';
 
 const MovieCard = ({ _id, title, image, thumbnailUrl, posterUrl, variant = 'portrait', subtitle, rating, type = 'movie', resumeTime, onRemove, onInfo }) => {
-    const { isInWatchlist, isDownloaded, toggleWatchlist, addDownload } = useContext(ContentContext);
+    const { isInWatchlist, toggleWatchlist } = useContext(ContentContext);
     const navigate = useNavigate();
     const isLandscape = variant === 'landscape';
     const displayImage = image || thumbnailUrl || posterUrl;
@@ -87,17 +87,6 @@ const MovieCard = ({ _id, title, image, thumbnailUrl, posterUrl, variant = 'port
                                 title={isInWatchlist(movieStatusId) ? "Remove from List" : "Add to List"}
                             >
                                 {isInWatchlist(movieStatusId) ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                            </button>
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    addDownload({ id: movieStatusId, title, thumbnailUrl: displayImage, type });
-                                }}
-                                className={`p-2.5 rounded-full transition-all border shadow-xl active:scale-90 ${isDownloaded(movieStatusId) ? 'bg-green-600/20 text-green-500 border-green-600/30' : 'bg-white/5 text-white border-white/10 hover:bg-white/10'}`}
-                                title={isDownloaded(movieStatusId) ? "Already Downloaded" : "Download"}
-                            >
-                                {isDownloaded(movieStatusId) ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
                             </button>
                             {onRemove && (
                                 <button

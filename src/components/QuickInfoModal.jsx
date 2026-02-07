@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, Plus, ThumbsUp, ChevronDown, Check, Download } from 'lucide-react';
+import { X, Play, Plus, ThumbsUp, ChevronDown, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ContentContext from '../context/ContentContext';
 
 const QuickInfoModal = ({ movie, isOpen, onClose }) => {
     const navigate = useNavigate();
-    const { isInWatchlist, toggleWatchlist, isDownloaded, addDownload } = useContext(ContentContext);
+    const { isInWatchlist, toggleWatchlist } = useContext(ContentContext);
 
     if (!movie) return null;
 
@@ -75,49 +75,43 @@ const QuickInfoModal = ({ movie, isOpen, onClose }) => {
                                     >
                                         {isInWatchlist(movieStatusId) ? <Check className="w-5 h-5 text-brand-red" /> : <Plus className="w-5 h-5" />}
                                     </button>
-                                    <button
-                                        onClick={() => addDownload(movie)}
-                                        className={`p-4 border rounded-full transition-all ${isDownloaded(movieStatusId) ? 'bg-green-600/10 border-green-600/30 text-green-500' : 'bg-white/5 border-white/10 text-white hover:bg-white/10'}`}
-                                        title={isDownloaded(movieStatusId) ? "Already Added" : "Download"}
-                                    >
-                                        <Download className="w-5 h-5" />
-                                    </button>
-                                </div>
+                                </button>
                             </div>
                         </div>
+                </div>
 
                         {/* Metadata Details */}
-                        <div className="p-12 grid grid-cols-1 md:grid-cols-3 gap-12 text-white">
-                            <div className="md:col-span-2 space-y-8">
-                                <div className="flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-gray-400">
-                                    <span className="text-green-500 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">{movie.rating || '9.5'} Rating</span>
-                                    <span className="bg-white/5 px-2 py-0.5 rounded border border-white/10">{movie.year || '2024'}</span>
-                                    <span className="border border-brand-red/30 text-brand-red px-2 py-0.5 rounded">ULTRA HD</span>
-                                </div>
-                                <p className="text-xl text-gray-300 leading-relaxed font-light">
-                                    {movie.description || movie.overview || "This masterpiece brings together a compelling narrative with breathtaking visuals, taking you on an unforgettable journey through the heart of cinematic excellence."}
-                                </p>
-                            </div>
-
-                            <div className="space-y-6 pt-1">
-                                <div className="space-y-1">
-                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block">Genres</span>
-                                    <span className="text-white font-black text-sm">{movie.genre || movie.category || 'Action, Drama'}</span>
-                                </div>
-                                <div className="space-y-1">
-                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block">Maturity Rating</span>
-                                    <span className="text-white font-black text-sm">18+ (High Intensity)</span>
-                                </div>
-                                <div className="space-y-1">
-                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block">Available in</span>
-                                    <span className="text-brand-red font-black text-sm">Hindi, English, Spanish</span>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
+            <div className="p-12 grid grid-cols-1 md:grid-cols-3 gap-12 text-white">
+                <div className="md:col-span-2 space-y-8">
+                    <div className="flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-gray-400">
+                        <span className="text-green-500 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">{movie.rating || '9.5'} Rating</span>
+                        <span className="bg-white/5 px-2 py-0.5 rounded border border-white/10">{movie.year || '2024'}</span>
+                        <span className="border border-brand-red/30 text-brand-red px-2 py-0.5 rounded">ULTRA HD</span>
+                    </div>
+                    <p className="text-xl text-gray-300 leading-relaxed font-light">
+                        {movie.description || movie.overview || "This masterpiece brings together a compelling narrative with breathtaking visuals, taking you on an unforgettable journey through the heart of cinematic excellence."}
+                    </p>
                 </div>
+
+                <div className="space-y-6 pt-1">
+                    <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block">Genres</span>
+                        <span className="text-white font-black text-sm">{movie.genre || movie.category || 'Action, Drama'}</span>
+                    </div>
+                    <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block">Maturity Rating</span>
+                        <span className="text-white font-black text-sm">18+ (High Intensity)</span>
+                    </div>
+                    <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block">Available in</span>
+                        <span className="text-brand-red font-black text-sm">Hindi, English, Spanish</span>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+                </div >
             )}
-        </AnimatePresence>
+        </AnimatePresence >
     );
 };
 
