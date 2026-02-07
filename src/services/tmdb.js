@@ -135,6 +135,78 @@ const DEMO_CONTENT = [
                 name: "Season 1"
             }
         ]
+    },
+    {
+        id: 8,
+        _id: 8,
+        title: "Stranger Components",
+        description: "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+        thumbnailUrl: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop",
+        posterUrl: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop",
+        backdropUrl: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop",
+        videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+        year: "2016",
+        rating: 4.8,
+        category: "Sci-Fi",
+        type: "tv",
+        duration: "50m per episode",
+        isPopular: true,
+        genres: "Sci-Fi, Horror, Drama",
+        seasons: [{ season_number: 1, episode_count: 8, name: "Season 1" }]
+    },
+    {
+        id: 9,
+        _id: 9,
+        title: "Breaking Bugs",
+        description: "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+        thumbnailUrl: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=2069&auto=format&fit=crop",
+        posterUrl: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=2069&auto=format&fit=crop",
+        backdropUrl: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=2069&auto=format&fit=crop",
+        videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+        year: "2008",
+        rating: 4.9,
+        category: "Crime",
+        type: "tv",
+        duration: "47m per episode",
+        isPopular: true,
+        genres: "Crime, Drama, Thriller",
+        seasons: [{ season_number: 1, episode_count: 7, name: "Season 1" }]
+    },
+    {
+        id: 10,
+        _id: 10,
+        title: "The Cache",
+        description: "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the twentieth century.",
+        thumbnailUrl: "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=2070&auto=format&fit=crop",
+        posterUrl: "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=2070&auto=format&fit=crop",
+        backdropUrl: "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=2070&auto=format&fit=crop",
+        videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        year: "2016",
+        rating: 4.7,
+        category: "Drama",
+        type: "tv",
+        duration: "58m per episode",
+        isPopular: true,
+        genres: "Drama, History",
+        seasons: [{ season_number: 1, episode_count: 10, name: "Season 1" }]
+    },
+    {
+        id: 11,
+        _id: 11,
+        title: "Money Heist: React Edition",
+        description: "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
+        thumbnailUrl: "https://images.unsplash.com/photo-1565520651265-724bc247c74c?q=80&w=1974&auto=format&fit=crop",
+        posterUrl: "https://images.unsplash.com/photo-1565520651265-724bc247c74c?q=80&w=1974&auto=format&fit=crop",
+        backdropUrl: "https://images.unsplash.com/photo-1565520651265-724bc247c74c?q=80&w=1974&auto=format&fit=crop",
+        videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        year: "2017",
+        rating: 4.6,
+        category: "Action",
+        type: "tv",
+        duration: "70m per episode",
+        isPopular: true,
+        genres: "Action, Crime, Mystery",
+        seasons: [{ season_number: 1, episode_count: 5, name: "Part 1" }]
     }
 ];
 
@@ -161,9 +233,30 @@ const MOCK_EPISODES = [
         episode_number: 3,
         name: "Ep 3: The Mountains",
         overview: "High altitude survival.",
+    },
+    {
+        id: 1003,
+        episode_number: 3,
+        name: "Ep 3: The Mountains",
+        overview: "High altitude survival.",
         videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
         still_path: "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg"
-    }
+    },
+    // Stranger Components Episodes
+    { id: 2001, episode_number: 1, name: "Chapter One: The Vanishing", overview: "On his way home from a friend's house, young Will sees something terrifying.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", still_path: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" },
+    { id: 2002, episode_number: 2, name: "Chapter Two: The Weirdo", overview: "Lucas, Mike and Dustin try to talk to the girl they found in the woods.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", still_path: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" },
+    { id: 2003, episode_number: 3, name: "Chapter Three: Holly, Jolly", overview: "An increasingly concerned Nancy looks for Barb and finds out what Jonathan's been up to.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", still_path: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" },
+
+    // Breaking Bugs Episodes
+    { id: 3001, episode_number: 1, name: "Pilot", overview: "Diagnosed with terminal lung cancer, chemistry teacher Walter White teams up with his former student.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", still_path: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=2069&auto=format&fit=crop" },
+    { id: 3002, episode_number: 2, name: "Cat's in the Bag...", overview: "Walt and Jesse attempt to dispose of the bodies in the RV.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", still_path: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=2069&auto=format&fit=crop" },
+
+    // The Cache Episodes
+    { id: 4001, episode_number: 1, name: "Wolferton Splash", overview: "Princess Elizabeth and Prince Philip marry; King George VI's health worsens.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", still_path: "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=2070&auto=format&fit=crop" },
+    { id: 4002, episode_number: 2, name: "Hyde Park Corner", overview: "With King George too ill to travel, Elizabeth and Philip embark on a four-continent commonwealth tour.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", still_path: "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=2070&auto=format&fit=crop" },
+
+    // Money Heist
+    { id: 5001, episode_number: 1, name: "Episode 1", overview: " The Professor recruits a young female robber and seven other criminals for a grand heist.", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", still_path: "https://images.unsplash.com/photo-1565520651265-724bc247c74c?q=80&w=1974&auto=format&fit=crop" }
 ];
 
 // --- API LIKE EXPORTS ---
