@@ -580,14 +580,26 @@ const WatchPage = () => {
                         <div className="flex flex-col gap-2 flex-1">
                             <div className="flex flex-wrap items-center gap-3">
                                 <h1 className="text-xl sm:text-2xl md:text-3xl font-display font-bold tracking-tight">{content.title}</h1>
-                                <span className="bg-white/10 px-3 py-1 rounded text-xs sm:text-sm font-bold text-gray-300">{content.year}</span>
-                            </div>
-                            <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-1 sm:mt-2 text-xs sm:text-sm text-gray-400">
-                                <span className="flex items-center gap-1.5 text-yellow-500 font-bold">
-                                    <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" /> {content.rating}
-                                </span>
-                                <span className="font-bold sm:border-l border-white/10 sm:pl-4">{content.duration}</span>
-                                <span className="uppercase tracking-widest text-[#9ca3af] font-black text-[9px] sm:text-[10px] border border-[#374151] px-2 py-0.5 rounded-sm">{content.category}</span>
+                                {type === 'tv' && episode ? (
+                                    <div className="flex flex-col gap-1 mt-1">
+                                        <span className="text-xl sm:text-2xl font-bold text-gray-200">
+                                            {content.seasons?.find(s => s.season_number === season)?.name || `Season ${season}`}
+                                            <span className="text-brand-red"> • </span>
+                                            Episode {episode}
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <span className="bg-white/10 px-3 py-1 rounded text-xs sm:text-sm font-bold text-gray-300">{content.year}</span>
+                                        <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-1 sm:mt-2 text-xs sm:text-sm text-gray-400 w-full">
+                                            <span className="flex items-center gap-1.5 text-yellow-500 font-bold">
+                                                <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" /> {content.rating}
+                                            </span>
+                                            <span className="font-bold sm:border-l border-white/10 sm:pl-4">{content.duration}</span>
+                                            <span className="uppercase tracking-widest text-[#9ca3af] font-black text-[9px] sm:text-[10px] border border-[#374151] px-2 py-0.5 rounded-sm">{content.category}</span>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
 
