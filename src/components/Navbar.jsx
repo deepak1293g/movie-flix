@@ -81,38 +81,36 @@ const Navbar = () => {
 
 
                     {user ? (
-                        !mobileMenuOpen && (
-                            <div className="relative group/user">
-                                <div className="flex items-center gap-3 cursor-pointer group">
-                                    <div className="w-10 h-10 rounded-full premium-gradient-red flex items-center justify-center text-lg font-black text-white shadow-xl shadow-brand-red/10 group-hover:shadow-brand-red/40 group-hover:scale-105 transition-all duration-500 ring-2 ring-white/5 group-hover:ring-brand-red/30">
-                                        {user.name.charAt(0).toUpperCase()}
-                                    </div>
-                                    <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:rotate-180 transition-all duration-500" />
+                        <div className="hidden lg:flex relative group/user">
+                            <div className="flex items-center gap-3 cursor-pointer group">
+                                <div className="w-10 h-10 rounded-full premium-gradient-red flex items-center justify-center text-lg font-black text-white shadow-xl shadow-brand-red/10 group-hover:shadow-brand-red/40 group-hover:scale-105 transition-all duration-500 ring-2 ring-white/5 group-hover:ring-brand-red/30">
+                                    {user.name.charAt(0).toUpperCase()}
                                 </div>
+                                <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-white group-hover:rotate-180 transition-all duration-500" />
+                            </div>
 
-                                <div className="absolute right-0 top-full pt-4 opacity-0 invisible group-hover/user:opacity-100 group-hover/user:visible transition-all duration-500 transform translate-y-4 group-hover/user:translate-y-0">
-                                    <div className="glass-dark border border-white/10 rounded-[24px] shadow-2xl p-2 w-64 overflow-hidden">
-                                        <div className="px-4 py-4 border-b border-white/10 mb-2">
-                                            <p className="text-base text-white font-bold">{user.name}</p>
-                                            <p className="text-sm text-gray-500 truncate">{user.email}</p>
-                                        </div>
-                                        {mobileUserLinks.map((item) => (
-                                            <Link key={item.path} to={item.path} className="flex items-center gap-3 w-full px-4 py-3 text-base text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all text-left">
-                                                <item.icon className="w-5 h-5" />
-                                                {item.name}
-                                            </Link>
-                                        ))}
-                                        <button
-                                            onClick={handleLogout}
-                                            className="flex items-center gap-3 w-full px-4 py-3 text-base text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
-                                        >
-                                            <LogOut className="w-5 h-5" />
-                                            Sign Out
-                                        </button>
+                            <div className="absolute right-0 top-full pt-4 opacity-0 invisible group-hover/user:opacity-100 group-hover/user:visible transition-all duration-500 transform translate-y-4 group-hover/user:translate-y-0">
+                                <div className="glass-dark border border-white/10 rounded-[24px] shadow-2xl p-2 w-64 overflow-hidden">
+                                    <div className="px-4 py-4 border-b border-white/10 mb-2">
+                                        <p className="text-base text-white font-bold">{user.name}</p>
+                                        <p className="text-sm text-gray-500 truncate">{user.email}</p>
                                     </div>
+                                    {mobileUserLinks.map((item) => (
+                                        <Link key={item.path} to={item.path} className="flex items-center gap-3 w-full px-4 py-3 text-base text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all text-left">
+                                            <item.icon className="w-5 h-5" />
+                                            {item.name}
+                                        </Link>
+                                    ))}
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex items-center gap-3 w-full px-4 py-3 text-base text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                                    >
+                                        <LogOut className="w-5 h-5" />
+                                        Sign Out
+                                    </button>
                                 </div>
                             </div>
-                        )
+                        </div>
                     ) : (
                         <div className="hidden lg:flex items-center">
                             <Link to="/login" className="text-sm sm:text-base lg:text-base font-bold hover:text-brand-red transition-all hover:scale-110 duration-300">Login</Link>
