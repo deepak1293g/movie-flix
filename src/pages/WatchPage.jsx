@@ -619,70 +619,59 @@ const WatchPage = () => {
                             <div className="lg:col-span-2 space-y-12">
                                 {type === 'tv' && (
                                     <div className="space-y-6">
-                                        <div className="flex items-center justify-between">
-                                            <h2 className="text-lg font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Episodes</h2>
-                                            <div className="relative group">
-                                                <select
-                                                    value={season}
-                                                    onChange={(e) => setSeason(Number(e.target.value))}
-                                                    className="appearance-none bg-white/5 border border-white/10 text-white font-bold text-sm px-4 py-2 pr-10 rounded-lg cursor-pointer focus:outline-none focus:border-brand-red transition-all"
+
+                                        {/* Season Tabs */}
+                                        <div className="flex items-center gap-4 overflow-x-auto no-scrollbar border-b border-white/10 pb-1">
+                                            {content.seasons?.map((s) => (
+                                                <button
+                                                    key={s.season_number}
+                                                    onClick={() => setSeason(s.season_number)}
+                                                    className={`px-4 py-2 text-sm font-bold whitespace-nowrap transition-all relative ${season === s.season_number ? 'text-white' : 'text-gray-400 hover:text-gray-200'}`}
                                                 >
-                                                    {content.seasons?.map((s) => (
-                                                        <option key={s.season_number} value={s.season_number} className="bg-[#1a1b21] text-white">
-                                                            {s.name} ({s.episode_count} Eps)
-                                                        </option>
-                                                    )) || <option value="1">Season 1</option>}
-                                                    {/* Fallback for testing Season 2 if not in demo content seasons array */}
-                                                    <option value="2" className="bg-[#1a1b21] text-white">Season 2 (Demo)</option>
-                                                </select>
-                                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                                    <ChevronDown className="w-4 h-4" />
-                                                </div>
-                                            </div>
+                                                    {s.name}
+                                                    {season === s.season_number && (
+                                                        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-red rounded-t-full"></div>
+                                                    )}
+                                                </button>
+                                            )) || (
+                                                    <button className="px-4 py-2 text-sm font-bold text-white border-b-2 border-brand-red">Season 1</button>
+                                                )}
                                         </div>
-                                        <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto no-scrollbar pr-2 pt-2">
+
+                                        {/* Full Width Episode List */}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                             {episodesList.map(ep => (
                                                 <div
                                                     key={ep.id}
                                                     onClick={() => handleEpisodeSelect(ep)}
-                                                    className={`flex items-center gap-4 p-3 rounded-2xl cursor-pointer transition-all duration-300 border group ${episode === ep.episode_number ? 'bg-white/5 border-white/20 shadow-xl' : 'bg-transparent border-transparent hover:bg-white/[0.03]'}`}
+                                                    className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all duration-300 border group ${episode === ep.episode_number ? 'bg-white/5 border-white/20 shadow-xl' : 'bg-transparent border-transparent hover:bg-white/[0.03]'}`}
                                                 >
-                                                    <div className="relative w-10 flex-shrink-0 text-center">
-                                                        <span className={`text-lg font-black font-mono transition-colors ${episode === ep.episode_number ? 'text-brand-red' : 'text-gray-600 group-hover:text-gray-400'}`}>
-                                                            {ep.episode_number < 10 ? `0${ep.episode_number}` : ep.episode_number}
-                                                        </span>
-                                                    </div>
-
-                                                    <div className="relative w-20 sm:w-40 aspect-video flex-shrink-0 rounded-xl overflow-hidden shadow-lg">
-                                                        <img src={ep.still_path || content.backdropUrl} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                                    <div className="relative w-28 aspect-video flex-shrink-0 rounded-lg overflow-hidden shadow-sm bg-gray-900">
+                                                        <img src={ep.still_path || content.backdropUrl} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
                                                         <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity ${episode === ep.episode_number ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                                                             {episode === ep.episode_number ? (
-                                                                <div className="flex gap-1 items-end h-4">
-                                                                    <div className="w-1 bg-brand-red animate-[bounce_1s_infinite]"></div>
-                                                                    <div className="w-1 bg-brand-red animate-[bounce_1.2s_infinite]"></div>
-                                                                    <div className="w-1 bg-brand-red animate-[bounce_0.8s_infinite]"></div>
+                                                                <div className="flex gap-1 items-end h-3">
+                                                                    <div className="w-0.5 bg-brand-red animate-[bounce_1s_infinite]"></div>
+                                                                    <div className="w-0.5 bg-brand-red animate-[bounce_1.2s_infinite]"></div>
+                                                                    <div className="w-0.5 bg-brand-red animate-[bounce_0.8s_infinite]"></div>
                                                                 </div>
                                                             ) : (
-                                                                <Play className="w-6 h-6 fill-white text-white opacity-80" />
+                                                                <Play className="w-5 h-5 fill-white text-white opacity-90" />
                                                             )}
                                                         </div>
+                                                        <div className="absolute bottom-1 left-1 bg-black/60 px-1.5 py-0.5 rounded text-[9px] font-bold text-white backdrop-blur-sm">
+                                                            E{ep.episode_number}
+                                                        </div>
                                                     </div>
 
-                                                    <div className="flex-1 min-w-0 pr-4">
-                                                        <div className="flex items-center justify-between gap-2 mb-1">
-                                                            <h3 className={`font-bold text-sm sm:text-base truncate transition-colors ${episode === ep.episode_number ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
-                                                                {ep.name}
-                                                            </h3>
-                                                            {ep.runtime && <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{ep.runtime}m</span>}
-                                                        </div>
-                                                        <p className="text-[11px] sm:text-xs text-gray-500 line-clamp-1 leading-relaxed font-medium">
-                                                            {ep.overview || "No description available for this episode."}
+                                                    <div className="flex-1 min-w-0 py-1">
+                                                        <h3 className={`font-bold text-sm leading-tight transition-colors mb-1 ${episode === ep.episode_number ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
+                                                            {ep.name}
+                                                        </h3>
+                                                        <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed font-medium">
+                                                            {ep.overview || "No description available."}
                                                         </p>
                                                     </div>
-
-                                                    {episode === ep.episode_number && (
-                                                        <div className="w-1.5 h-1.5 rounded-full bg-brand-red shadow-[0_0_10px_#E50914] mr-2"></div>
-                                                    )}
                                                 </div>
                                             ))}
                                         </div>
