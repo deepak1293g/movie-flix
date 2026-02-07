@@ -41,7 +41,7 @@ const BrowsePage = () => {
         : 'Explore our complete series catalog';
 
     return (
-        <div ref={pageRef} className="min-h-screen bg-[#0f1014] text-white pt-48 md:pt-36 px-4 sm:px-8">
+        <div ref={pageRef} className="min-h-screen bg-[#0f1014] text-white pt-24 md:pt-28 px-4 sm:px-8">
             <div className="max-w-[1600px] mx-auto">
                 {/* Header */}
                 <div className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
