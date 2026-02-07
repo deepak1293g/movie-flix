@@ -80,7 +80,7 @@ const Navbar = () => {
                     </div>
 
 
-                    {user ? (
+                    {user && !mobileMenuOpen ? (
                         <div className="relative group/user">
                             <div className="flex items-center gap-3 cursor-pointer group">
                                 <div className="w-10 h-10 rounded-full premium-gradient-red flex items-center justify-center text-lg font-black text-white shadow-xl shadow-brand-red/10 group-hover:shadow-brand-red/40 group-hover:scale-105 transition-all duration-500 ring-2 ring-white/5 group-hover:ring-brand-red/30">
