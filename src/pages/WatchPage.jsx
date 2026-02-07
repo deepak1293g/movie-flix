@@ -3,7 +3,7 @@ import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check, ChevronDown } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
 import ContentContext from '../context/ContentContext';
-import { fetchDetails, fetchSeasonDetails, fetchMovies } from '../services/tmdb';
+import { fetchDetails, fetchMovies } from '../services/tmdb';
 import * as userService from '../services/userService';
 import toast from 'react-hot-toast';
 
@@ -66,9 +66,6 @@ const WatchPage = () => {
     const lastTapTimeRef = React.useRef(0);
 
     // Series State
-    const [season, setSeason] = useState(1);
-    const [episode, setEpisode] = useState(1);
-    const [episodesList, setEpisodesList] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -81,12 +78,10 @@ const WatchPage = () => {
             if (data) {
                 setContent(data);
                 if (type === 'tv') {
-                    const eps = await fetchSeasonDetails(id, 1);
-                    setEpisodesList(eps);
-                    if (eps.length > 0) setCurrentVideoUrl(eps[0].videoUrl);
-                } else {
-                    setCurrentVideoUrl(data.videoUrl);
+                    // TV Logic can be expanded here if needed later
+                    console.log("TV Series loaded");
                 }
+                setCurrentVideoUrl(data.videoUrl);
 
                 // Check for timestamp in URL first
                 const urlTime = searchParams.get('t');
@@ -362,11 +357,7 @@ const WatchPage = () => {
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
-    const handleEpisodeSelect = (ep) => {
-        setEpisode(ep.episode_number);
-        setCurrentVideoUrl(ep.videoUrl);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+
 
     const handleToggleWatchlist = () => {
         toggleWatchlist(content);
@@ -581,33 +572,9 @@ const WatchPage = () => {
                             <div className="flex flex-wrap items-center gap-3">
                                 <h1 className="text-xl sm:text-2xl md:text-3xl font-display font-bold tracking-tight">{content.title}</h1>
                                 {type === 'tv' && episode ? (
-                                    <div className="flex flex-col gap-1 mt-1">
-                                        <span className="text-xl sm:text-2xl font-bold text-gray-200">
-                                            {content.seasons?.find(s => s.season_number === season)?.name || `Season ${season}`}
-                                            <span className="text-brand-red"> • </span>
-                                            Episode {episode}
-                                        </span>
-                                    </div>
-                                ) : (
-                                    <>
-                                        <span className="bg-white/10 px-3 py-1 rounded text-xs sm:text-sm font-bold text-gray-300">{content.year}</span>
-                                        <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-1 sm:mt-2 text-xs sm:text-sm text-gray-400 w-full">
-                                            <span className="flex items-center gap-1.5 text-yellow-500 font-bold">
-                                                <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" /> {content.rating}
-                                            </span>
-                                            <span className="font-bold sm:border-l border-white/10 sm:pl-4">{content.duration}</span>
-                                            <span className="uppercase tracking-widest text-[#9ca3af] font-black text-[9px] sm:text-[10px] border border-[#374151] px-2 py-0.5 rounded-sm">{content.category}</span>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
 
-                        <div className="flex items-center gap-2 sm:gap-4 w-full md:w-auto">
-                            <button
-                                onClick={handleToggleWatchlist}
-                                className={`flex-1 flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-xl transition-all font-bold text-xs sm:text-base whitespace-nowrap ${isAlreadyInList(id) ? 'bg-white/10 text-white' : 'bg-white text-black hover:bg-gray-200 shadow-lg'}`}
-                            >
+                                    className = {`flex-1 flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-xl transition-all font-bold text-xs sm:text-base whitespace-nowrap ${isAlreadyInList(id) ? 'bg-white/10 text-white' : 'bg-white text-black hover:bg-gray-200 shadow-lg'}`}
+                    >
                                 {isAlreadyInList(id) ? <Check className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" /> : <Plus className="w-4 h-4 sm:w-5 sm:h-5" />}
                                 <span>{isAlreadyInList(id) ? 'In My List' : 'Add to List'}</span>
                             </button>
@@ -679,7 +646,7 @@ const WatchPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </div >
     );
 };
