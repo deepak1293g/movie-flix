@@ -51,7 +51,7 @@ const MyListPage = () => {
     );
 
     return (
-        <div className="pt-36 md:pt-32 min-h-screen bg-[#0f1014] pb-20 px-4 sm:px-12">
+        <div className="pt-36 md:pt-32 min-h-screen bg-[#0f1014] pb-20 px-4 sm:px-8 lg:px-12">
             <div className={`max-w-6xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 <header className="mb-16">
                     <h1 className="text-3xl sm:text-4xl font-bold mb-2">My List</h1>
