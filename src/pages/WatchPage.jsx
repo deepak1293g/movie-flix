@@ -620,24 +620,6 @@ const WatchPage = () => {
                                 {type === 'tv' && (
                                     <div className="space-y-6">
 
-                                        {/* Season Tabs */}
-                                        <div className="flex items-center gap-4 overflow-x-auto no-scrollbar border-b border-white/10 pb-1">
-                                            {content.seasons?.map((s) => (
-                                                <button
-                                                    key={s.season_number}
-                                                    onClick={() => setSeason(s.season_number)}
-                                                    className={`px-4 py-2 text-sm font-bold whitespace-nowrap transition-all relative ${season === s.season_number ? 'text-white' : 'text-gray-400 hover:text-gray-200'}`}
-                                                >
-                                                    {s.name}
-                                                    {season === s.season_number && (
-                                                        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-red rounded-t-full"></div>
-                                                    )}
-                                                </button>
-                                            )) || (
-                                                    <button className="px-4 py-2 text-sm font-bold text-white border-b-2 border-brand-red">Season 1</button>
-                                                )}
-                                        </div>
-
                                         {/* Full Width Episode List */}
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                             {episodesList.map(ep => (
