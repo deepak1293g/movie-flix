@@ -609,7 +609,24 @@ const WatchPage = () => {
                                     <div className="space-y-6">
                                         <div className="flex items-center justify-between">
                                             <h2 className="text-lg font-bold uppercase tracking-wider underline decoration-brand-red decoration-4 underline-offset-8">Episodes</h2>
-                                            <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-sm font-bold">Season {season}</div>
+                                            <div className="relative group">
+                                                <select
+                                                    value={season}
+                                                    onChange={(e) => setSeason(Number(e.target.value))}
+                                                    className="appearance-none bg-white/5 border border-white/10 text-white font-bold text-sm px-4 py-2 pr-10 rounded-lg cursor-pointer focus:outline-none focus:border-brand-red transition-all"
+                                                >
+                                                    {content.seasons?.map((s) => (
+                                                        <option key={s.season_number} value={s.season_number} className="bg-[#1a1b21] text-white">
+                                                            {s.name} ({s.episode_count} Eps)
+                                                        </option>
+                                                    )) || <option value="1">Season 1</option>}
+                                                    {/* Fallback for testing Season 2 if not in demo content seasons array */}
+                                                    <option value="2" className="bg-[#1a1b21] text-white">Season 2 (Demo)</option>
+                                                </select>
+                                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                                    <ChevronDown className="w-4 h-4" />
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto no-scrollbar pr-2 pt-2">
                                             {episodesList.map(ep => (
