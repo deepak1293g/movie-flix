@@ -395,14 +395,14 @@ const WatchPage = () => {
     if (!content) return <div className="text-white text-center pt-24">Content Not Found</div>;
 
     return (
-        <div className="pt-36 md:pt-44 min-h-screen bg-[#0f1014] text-white">
+        <div className="pt-28 md:pt-32 min-h-screen bg-[#0f1014] text-white">
             <div className="max-w-[1600px] mx-auto flex flex-col gap-4 sm:gap-8 pb-20">
 
                 {/* Main Video Section */}
                 <div className="w-full">
                     <div
                         ref={playerContainerRef}
-                        className="relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500"
+                        className="relative aspect-video w-full max-w-[1000px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500"
                         onMouseEnter={() => setShowControls(true)}
                         onMouseLeave={() => {
                             if (!isQualityMenuOpen) {
