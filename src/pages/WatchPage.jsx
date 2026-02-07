@@ -602,7 +602,7 @@ const WatchPage = () => {
                         </div>
                     </div>
 
-                    <div className="space-y-12 mt-8">
+                    <div className="space-y-12 mt-96 border-t border-white/5 pt-12">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                             <div className="lg:col-span-2 space-y-12">
                                 {type === 'tv' && (
