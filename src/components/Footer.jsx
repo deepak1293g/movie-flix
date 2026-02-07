@@ -48,9 +48,8 @@ const Footer = () => {
                                             item === 'Home' ? '/' :
                                                 item === 'Movies' ? '/browse/movies' :
                                                     item === 'Series' ? '/browse/series' :
-                                                        item === 'My List' ? '/mylist' :
-                                                            item === 'Downloads' ? '/downloads' :
-                                                                `/${item.toLowerCase().replace(/ /g, '')}`
+                                                        item === 'My List' ? '/mylist' 
+                                                            
                                         }
                                         className="text-gray-400 hover:text-brand-red text-[15px] transition-colors duration-200 flex items-center gap-2 group"
                                     >
