@@ -102,24 +102,25 @@ const DownloadsPage = () => {
                                                 </div>
 
                                                 <h3 className="text-xl font-bold truncate text-white mb-1">{item.title}</h3>
-                                                <p className="text-gray-500 text-sm line-clamp-1 mb-4 hidden sm:block">
+                                                <p className="text-gray-500 text-sm line-clamp-1 hidden sm:block">
                                                     Ready for offline playback.
                                                 </p>
+                                            </div>
 
-                                                <div className="flex flex-row gap-2 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-white/10">
-                                                    <Link
-                                                        to={`/offline-watch/${item.id}/${item.slug}`}
-                                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white text-black px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-lg active:scale-95"
-                                                    >
-                                                        Watch <Play size={14} fill="currentColor" />
-                                                    </Link>
-                                                    <button
-                                                        onClick={() => removeDownload(item.id)}
-                                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/10 hover:bg-red-600/20 text-white hover:text-red-500 px-6 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95"
-                                                    >
-                                                        <Trash2 size={14} /> Remove
-                                                    </button>
-                                                </div>
+                                            {/* Actions */}
+                                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                                                <Link
+                                                    to={`/offline-watch/${item.id}/${item.slug}`}
+                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white text-black px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-gray-200 transition-all shadow-lg active:scale-95"
+                                                >
+                                                    Watch <Play size={14} fill="currentColor" />
+                                                </Link>
+                                                <button
+                                                    onClick={() => removeDownload(item.id)}
+                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/10 hover:bg-red-600/20 text-white hover:text-red-500 px-6 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95"
+                                                >
+                                                    <Trash2 size={14} /> Remove
+                                                </button>
                                             </div>
                                         </div>
                                     ))}
@@ -164,7 +165,7 @@ const DownloadsPage = () => {
                                                     <span>{item.date || 'Recent'}</span>
                                                 </div>
 
-                                                <div className="w-full space-y-2 mb-4">
+                                                <div className="w-full space-y-2">
                                                     <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
                                                         <div
                                                             className={`h-full transition-all duration-700 ${item.isPaused ? 'bg-gray-600' : 'bg-red-600'}`}
@@ -176,21 +177,22 @@ const DownloadsPage = () => {
                                                         <span className="text-gray-500">{item.size || '3.2 GB'}</span>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div className="flex flex-row gap-2 w-full sm:w-auto border-t sm:border-t-0 border-white/10 pt-4 sm:pt-0">
-                                                    <button
-                                                        onClick={() => togglePause(item.id)}
-                                                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95 ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/10 text-white hover:bg-white/20'}`}
-                                                    >
-                                                        {item.isPaused ? <><Play size={14} fill="currentColor" /> Resume</> : <><Pause size={14} /> Pause</>}
-                                                    </button>
-                                                    <button
-                                                        onClick={() => removeDownload(item.id)}
-                                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/10 hover:bg-red-600/20 text-white hover:text-red-500 px-6 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95"
-                                                    >
-                                                        <Trash2 size={14} /> Remove
-                                                    </button>
-                                                </div>
+                                            {/* Actions */}
+                                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                                                <button
+                                                    onClick={() => togglePause(item.id)}
+                                                    className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95 ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                                                >
+                                                    {item.isPaused ? <><Play size={14} fill="currentColor" /> Resume</> : <><Pause size={14} /> Pause</>}
+                                                </button>
+                                                <button
+                                                    onClick={() => removeDownload(item.id)}
+                                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/10 hover:bg-red-600/20 text-white hover:text-red-500 px-6 py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95"
+                                                >
+                                                    <Trash2 size={14} /> Remove
+                                                </button>
                                             </div>
                                         </div>
                                     ))}
