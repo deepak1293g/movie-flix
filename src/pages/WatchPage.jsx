@@ -624,7 +624,7 @@ const WatchPage = () => {
                                                         </span>
                                                     </div>
 
-                                                    <div className="relative w-32 sm:w-40 aspect-video flex-shrink-0 rounded-xl overflow-hidden shadow-lg">
+                                                    <div className="relative w-20 sm:w-40 aspect-video flex-shrink-0 rounded-xl overflow-hidden shadow-lg">
                                                         <img src={ep.still_path || content.backdropUrl} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                                                         <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity ${episode === ep.episode_number ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                                                             {episode === ep.episode_number ? (
