@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
-import { Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check } from 'lucide-react';
+import { Star, PlayCircle, Play, Pause, SkipBack, SkipForward, Maximize, Volume2, VolumeX, Settings, Plus, Check, ChevronDown } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
 import ContentContext from '../context/ContentContext';
 import { fetchDetails, fetchSeasonDetails, fetchMovies } from '../services/tmdb';
