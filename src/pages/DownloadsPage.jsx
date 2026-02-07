@@ -92,31 +92,30 @@ const DownloadsPage = () => {
                                             </div>
 
                                             {/* Item Info */}
-                                            <div className="flex-1 flex flex-col justify-center min-w-0 w-full">
+                                            <div className="flex-1 flex flex-col justify-center min-w-0 w-full py-2">
                                                 <h3 className="text-xl font-bold truncate tracking-tight text-white mb-2">{item.title}</h3>
-                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
                                                     <span>•</span>
                                                     <span className="text-brand-red font-black">{item.size}</span>
                                                 </div>
-                                            </div>
 
-                                            {/* Actions */}
-                                            <div className="flex sm:flex-col lg:flex-row gap-3 w-full sm:w-auto mt-4 sm:mt-0 pt-4 sm:pt-0 sm:border-l lg:border-l-0 border-white/10 sm:pl-6 lg:pl-0">
-                                                <Link
-                                                    to={`/offline-watch/${item.id}/${item.slug}`}
-                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 sm:gap-3 bg-brand-red text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs hover:bg-red-700 transition-all shadow-lg hover:shadow-brand-red/20 whitespace-nowrap group active:scale-95"
-                                                >
-                                                    Watch Now <Play size={16} fill="currentColor" className="transition-transform group-hover:scale-110" />
-                                                </Link>
-                                                <button
-                                                    onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
-                                                >
-                                                    <Trash2 size={16} /> <span className="sm:hidden lg:inline">Remove</span>
-                                                </button>
+                                                <div className="flex flex-row gap-3 w-full sm:w-auto">
+                                                    <Link
+                                                        to={`/offline-watch/${item.id}/${item.slug}`}
+                                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 sm:gap-3 bg-brand-red text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs hover:bg-red-700 transition-all shadow-lg hover:shadow-brand-red/20 whitespace-nowrap group active:scale-95"
+                                                    >
+                                                        Watch Now <Play size={16} fill="currentColor" className="transition-transform group-hover:scale-110" />
+                                                    </Link>
+                                                    <button
+                                                        onClick={() => removeDownload(item.id)}
+                                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap active:scale-95"
+                                                    >
+                                                        <Trash2 size={16} /> <span className="hidden sm:inline">Remove</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
@@ -149,19 +148,19 @@ const DownloadsPage = () => {
                                             </div>
 
                                             {/* Item Info & Main Progress */}
-                                            <div className="flex-1 flex flex-col justify-center min-w-0 w-full">
+                                            <div className="flex-1 flex flex-col justify-center min-w-0 w-full py-2">
                                                 <div className="flex items-center justify-between mb-2">
                                                     <h3 className="text-xl font-bold truncate tracking-tight text-white">{item.title}</h3>
                                                     <span className="text-xs font-black text-brand-red bg-brand-red/10 px-2 py-0.5 rounded border border-brand-red/20">{item.progress}%</span>
                                                 </div>
 
-                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">
+                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
                                                 </div>
 
-                                                <div className="w-full space-y-3">
+                                                <div className="w-full space-y-3 mb-6">
                                                     <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/10 relative">
                                                         <div
                                                             className={`h-full transition-all duration-700 shadow-[0_0_20px_rgba(229,9,20,0.5)] ${item.isPaused ? 'bg-gray-600' : 'bg-brand-red'}`}
@@ -173,22 +172,21 @@ const DownloadsPage = () => {
                                                         <span className="text-gray-400">{item.size || '3.2 GB'} total</span>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            {/* Actions */}
-                                            <div className="flex flex-row md:flex-col lg:flex-row gap-3 w-full md:w-auto mt-2 md:mt-0 pt-4 md:pt-0 md:border-l lg:border-l-0 border-white/10 md:pl-6 lg:pl-0 border-t md:border-t-0">
-                                                <button
-                                                    onClick={() => togglePause(item.id)}
-                                                    className={`flex-1 lg:flex-none flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all whitespace-nowrap shadow-lg active:scale-95 ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
-                                                >
-                                                    {item.isPaused ? <><Play size={16} fill="currentColor" /> Resume</> : <><Pause size={16} /> Pause</>}
-                                                </button>
-                                                <button
-                                                    onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
-                                                >
-                                                    <Trash2 size={16} /> <span className="sm:hidden lg:inline">Remove</span>
-                                                </button>
+                                                <div className="flex flex-row gap-3 w-full sm:w-auto">
+                                                    <button
+                                                        onClick={() => togglePause(item.id)}
+                                                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all whitespace-nowrap shadow-lg active:scale-95 ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
+                                                    >
+                                                        {item.isPaused ? <><Play size={16} fill="currentColor" /> Resume</> : <><Pause size={16} /> Pause</>}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => removeDownload(item.id)}
+                                                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap active:scale-95"
+                                                    >
+                                                        <Trash2 size={16} /> <span className="hidden sm:inline">Remove</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
