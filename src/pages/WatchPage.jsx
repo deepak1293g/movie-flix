@@ -402,7 +402,7 @@ const WatchPage = () => {
                 <div className="w-full">
                     <div
                         ref={playerContainerRef}
-                        className="relative aspect-video w-full max-w-[1200px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500"
+                        className="relative aspect-video w-full max-w-[1100px] mx-auto bg-black sm:rounded-2xl overflow-hidden shadow-2xl sm:border border-white/10 group transition-all duration-500"
                         onMouseEnter={() => setShowControls(true)}
                         onMouseLeave={() => {
                             if (!isQualityMenuOpen) {
@@ -579,7 +579,7 @@ const WatchPage = () => {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/10 mt-4">
                         <div className="flex flex-col gap-2 flex-1">
                             <div className="flex flex-wrap items-center gap-3">
-                                <h1 className="text-2xl sm:text-4xl font-display font-bold tracking-tight">{content.title}</h1>
+                                <h1 className="text-xl sm:text-2xl md:text-3xl font-display font-bold tracking-tight">{content.title}</h1>
                                 <span className="bg-white/10 px-3 py-1 rounded text-xs sm:text-sm font-bold text-gray-300">{content.year}</span>
                             </div>
                             <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-1 sm:mt-2 text-xs sm:text-sm text-gray-400">
