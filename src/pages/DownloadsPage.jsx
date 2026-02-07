@@ -58,11 +58,11 @@ const DownloadsPage = () => {
         <div className="min-h-screen bg-[#0f1014] text-white pt-44 sm:pt-40 md:pt-32 pb-20 px-4 sm:px-8">
             <div className={`max-w-5xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
 
-                <header className="mb-12 sm:mb-16">
-                    <h1 className="text-4xl sm:text-5xl font-black mb-3 tracking-tight bg-gradient-to-r from-white via-white to-gray-500 bg-clip-text text-transparent">My Downloads</h1>
+                <header className="mb-8 sm:mb-12 md:mb-16">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 tracking-tight bg-gradient-to-r from-white via-white to-gray-500 bg-clip-text text-transparent">My Downloads</h1>
                     <div className="flex items-center gap-2 text-gray-500">
-                        <HardDrive size={16} />
-                        <p className="text-sm font-medium tracking-wide">Manage your offline streaming content</p>
+                        <HardDrive size={16} className="text-gray-400" />
+                        <p className="text-xs sm:text-sm font-medium tracking-wide">Manage your offline streaming content</p>
                     </div>
                 </header>
 
@@ -79,10 +79,10 @@ const DownloadsPage = () => {
                                     {downloads.filter(d => d.progress === 100).map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-[#16171d]/60 backdrop-blur-2xl p-5 sm:p-6 rounded-[32px] flex flex-col sm:flex-row items-center gap-6 border border-white/5 hover:border-brand-red/30 hover:bg-white/[0.05] transition-all duration-500 group/card shadow-2xl relative overflow-hidden"
+                                            className="bg-[#16171d]/60 backdrop-blur-2xl p-4 sm:p-5 md:p-6 rounded-[24px] sm:rounded-[32px] flex flex-col md:flex-row items-center gap-5 sm:gap-6 border border-white/5 hover:border-brand-red/30 hover:bg-white/[0.05] transition-all duration-500 group/card shadow-2xl relative overflow-hidden"
                                         >
                                             {/* Item Image */}
-                                            <div className="w-full sm:w-56 md:w-64 aspect-video flex-shrink-0 rounded-2xl overflow-hidden relative bg-gray-900 shadow-2xl group-hover/card:scale-[1.02] transition-transform duration-500">
+                                            <div className="w-full md:w-56 lg:w-64 aspect-video flex-shrink-0 rounded-xl sm:rounded-2xl overflow-hidden relative bg-gray-900 shadow-2xl group-hover/card:scale-[1.02] transition-transform duration-500">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover transform scale-105 group-hover/card:scale-100 transition-transform duration-700" />
                                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                     <div className="w-12 h-12 rounded-full bg-brand-red flex items-center justify-center text-white">
@@ -107,13 +107,13 @@ const DownloadsPage = () => {
                                             <div className="flex sm:flex-col lg:flex-row gap-3 w-full sm:w-auto mt-4 sm:mt-0 pt-4 sm:pt-0 sm:border-l lg:border-l-0 border-white/10 sm:pl-6 lg:pl-0">
                                                 <Link
                                                     to={`/offline-watch/${item.id}/${item.slug}`}
-                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-3 bg-brand-red text-white px-8 py-3.5 rounded-2xl font-bold text-xs hover:bg-red-700 transition-all shadow-xl shadow-brand-red/20 whitespace-nowrap group"
+                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 sm:gap-3 bg-brand-red text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs hover:bg-red-700 transition-all shadow-lg hover:shadow-brand-red/20 whitespace-nowrap group active:scale-95"
                                                 >
                                                     Watch Now <Play size={16} fill="currentColor" className="transition-transform group-hover:scale-110" />
                                                 </Link>
                                                 <button
                                                     onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-8 py-3.5 rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
+                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
                                                 >
                                                     <Trash2 size={16} /> <span className="sm:hidden lg:inline">Remove</span>
                                                 </button>
@@ -135,10 +135,10 @@ const DownloadsPage = () => {
                                     {downloads.filter(d => d.progress < 100).map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-[#16171d]/60 backdrop-blur-2xl p-5 sm:p-6 rounded-[32px] flex flex-col sm:flex-row items-center gap-6 border border-white/5 hover:border-brand-red/30 hover:bg-white/[0.05] transition-all duration-500 group/card shadow-2xl relative overflow-hidden"
+                                            className="bg-[#16171d]/60 backdrop-blur-2xl p-4 sm:p-5 md:p-6 rounded-[24px] sm:rounded-[32px] flex flex-col md:flex-row items-center gap-5 sm:gap-6 border border-white/5 hover:border-brand-red/30 hover:bg-white/[0.05] transition-all duration-500 group/card shadow-2xl relative overflow-hidden"
                                         >
                                             {/* Item Image & Mini Progress */}
-                                            <div className="w-full sm:w-56 md:w-64 aspect-video flex-shrink-0 rounded-2xl overflow-hidden relative bg-gray-900 shadow-2xl group-hover/card:scale-[1.02] transition-transform duration-500">
+                                            <div className="w-full md:w-56 lg:w-64 aspect-video flex-shrink-0 rounded-xl sm:rounded-2xl overflow-hidden relative bg-gray-900 shadow-2xl group-hover/card:scale-[1.02] transition-transform duration-500">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover transform scale-105 group-hover/card:scale-100 transition-transform duration-700" />
                                                 <div className="absolute bottom-0 left-0 w-full h-1.5 bg-white/10">
                                                     <div
@@ -176,16 +176,16 @@ const DownloadsPage = () => {
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex sm:flex-col lg:flex-row gap-3 w-full sm:w-auto mt-4 sm:mt-0 pt-4 sm:pt-0 sm:border-l lg:border-l-0 border-white/10 sm:pl-6 lg:pl-0">
+                                            <div className="flex flex-row md:flex-col lg:flex-row gap-3 w-full md:w-auto mt-2 md:mt-0 pt-4 md:pt-0 md:border-l lg:border-l-0 border-white/10 md:pl-6 lg:pl-0 border-t md:border-t-0">
                                                 <button
                                                     onClick={() => togglePause(item.id)}
-                                                    className={`flex-1 lg:flex-none flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl font-bold text-xs transition-all whitespace-nowrap shadow-xl ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
+                                                    className={`flex-1 lg:flex-none flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all whitespace-nowrap shadow-lg active:scale-95 ${item.isPaused ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'}`}
                                                 >
                                                     {item.isPaused ? <><Play size={16} fill="currentColor" /> Resume</> : <><Pause size={16} /> Pause</>}
                                                 </button>
                                                 <button
                                                     onClick={() => removeDownload(item.id)}
-                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-8 py-3.5 rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
+                                                    className="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-red-600/10 text-gray-400 hover:text-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-xs transition-all border border-white/10 hover:border-red-500/30 whitespace-nowrap"
                                                 >
                                                     <Trash2 size={16} /> <span className="sm:hidden lg:inline">Remove</span>
                                                 </button>
