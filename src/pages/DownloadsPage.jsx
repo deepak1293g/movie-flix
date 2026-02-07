@@ -94,7 +94,7 @@ const DownloadsPage = () => {
                                             {/* Item Info */}
                                             <div className="flex-1 flex flex-col justify-center min-w-0 w-full">
                                                 <h3 className="text-xl font-bold truncate tracking-tight text-white mb-2">{item.title}</h3>
-                                                <div className="flex items-center gap-3 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-black text-gray-400 uppercase tracking-widest">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
@@ -155,7 +155,7 @@ const DownloadsPage = () => {
                                                     <span className="text-xs font-black text-brand-red bg-brand-red/10 px-2 py-0.5 rounded border border-brand-red/20">{item.progress}%</span>
                                                 </div>
 
-                                                <div className="flex items-center gap-3 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">
+                                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">
                                                     <span className="bg-white/5 px-2 py-0.5 rounded border border-white/5">{item.type}</span>
                                                     <span>•</span>
                                                     <span>{item.date || 'Recent'}</span>
