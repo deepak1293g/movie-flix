@@ -571,10 +571,16 @@ const WatchPage = () => {
                         <div className="flex flex-col gap-2 flex-1">
                             <div className="flex flex-wrap items-center gap-3">
                                 <h1 className="text-xl sm:text-2xl md:text-3xl font-display font-bold tracking-tight">{content.title}</h1>
-                                {type === 'tv' && episode ? (
 
-                                    className = {`flex-1 flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-xl transition-all font-bold text-xs sm:text-base whitespace-nowrap ${isAlreadyInList(id) ? 'bg-white/10 text-white' : 'bg-white text-black hover:bg-gray-200 shadow-lg'}`}
-                    >
+
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 sm:gap-4 w-full md:w-auto">
+                            <button
+                                onClick={handleToggleWatchlist}
+                                className={`flex-1 flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-xl transition-all font-bold text-xs sm:text-base whitespace-nowrap ${isAlreadyInList(id) ? 'bg-white/10 text-white' : 'bg-white text-black hover:bg-gray-200 shadow-lg'}`}
+                            >
                                 {isAlreadyInList(id) ? <Check className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" /> : <Plus className="w-4 h-4 sm:w-5 sm:h-5" />}
                                 <span>{isAlreadyInList(id) ? 'In My List' : 'Add to List'}</span>
                             </button>

@@ -26,7 +26,7 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen relative flex items-center justify-center pt-32 md:pt-0 px-4 overflow-hidden">
+        <div className="min-h-screen relative flex items-center justify-center py-20 md:py-0 px-4">
             {/* Background Image with Overlay */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
